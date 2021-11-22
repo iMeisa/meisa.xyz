@@ -1,4 +1,4 @@
-module meisa_xyz
+module github.com/iMeisa/meisa.xyz
 
 go 1.16
 

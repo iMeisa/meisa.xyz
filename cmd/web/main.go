@@ -3,10 +3,10 @@ package main
 import (
 	"fmt"
 	"github.com/alexedwards/scs/v2"
+	"github.com/iMeisa/meisa.xyz/pkg/config"
+	"github.com/iMeisa/meisa.xyz/pkg/handlers"
+	"github.com/iMeisa/meisa.xyz/pkg/render"
 	"log"
-	"meisa_xyz/pkg/config"
-	"meisa_xyz/pkg/handlers"
-	"meisa_xyz/pkg/render"
 	"net/http"
 	"time"
 )
