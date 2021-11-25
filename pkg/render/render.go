@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/iMeisa/meisa.xyz/pkg/config"
 	"github.com/iMeisa/meisa.xyz/pkg/models"
+	"github.com/justinas/nosurf"
 	"html/template"
 	"log"
 	"net/http"
@@ -19,12 +20,12 @@ func NewTemplates(a *config.AppConfig) {
 	app = a
 }
 
-func AddDefaultData(data *models.TemplateData) *models.TemplateData {
-
+func AddDefaultData(data *models.TemplateData, r *http.Request) *models.TemplateData {
+	data.CSRFToken = nosurf.Token(r)
 	return data
 }
 
-func Template(w http.ResponseWriter, tmpl string, data *models.TemplateData) {
+func Template(w http.ResponseWriter, r *http.Request, tmpl string, data *models.TemplateData) {
 
 	var templateCache map[string]*template.Template
 
@@ -42,7 +43,7 @@ func Template(w http.ResponseWriter, tmpl string, data *models.TemplateData) {
 
 	buf := new(bytes.Buffer)
 
-	data = AddDefaultData(data)
+	data = AddDefaultData(data, r)
 
 	_ = page.Execute(buf, data)
 

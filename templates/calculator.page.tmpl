@@ -7,20 +7,30 @@
                 <h1>Calculator</h1>
             </div>
         </div>
-        <div class="row mt-4 mb-2">
-            <div class="col-lg-4"></div>
-            <div class="col-lg-4">
-                <div class="input-group">
-                    <input type="number" name="calc-1" class="form-control" placeholder="1" aria-label="2">
-                    <span class="input-group-text">+</span>
-                    <input type="number" name="calc-2" class="form-control" placeholder="2" aria-label="3">
+        <form action="/calculator" method="post" class="needs-validation">
+            <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
+            <div class="row mt-4 mb-2">
+                <div class="col-lg-4"></div>
+                <div class="col-lg-4">
+                    <div class="input-group">
+                        <input required type="number" name="calc-1" class="form-control" placeholder="1">
+                        <span class="input-group-text">+</span>
+                        <input required type="number" name="calc-2" class="form-control" placeholder="2">
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <button class="btn btn-success add-button">Add</button>
+            <!-- Result -->
+            <div class="row">
+                {{if ne (index .StringMap "calcResult") ""}}
+                    <p>{{index .StringMap "calcResult"}}</p>
+                {{end}}
             </div>
-        </div>
+
+            <div class="row mt-2">
+                <div class="col">
+                    <button class="btn btn-success add-button">Add</button>
+                </div>
+            </div>
+        </form>
     </div>
 {{end}}
