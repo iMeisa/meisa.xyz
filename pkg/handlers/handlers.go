@@ -1,6 +1,8 @@
 package handlers
 
 import (
+	"fmt"
+	"github.com/iMeisa/meisa.xyz/pkg/apps/calculator"
 	"github.com/iMeisa/meisa.xyz/pkg/config"
 	"github.com/iMeisa/meisa.xyz/pkg/models"
 	"github.com/iMeisa/meisa.xyz/pkg/render"
@@ -49,8 +51,10 @@ func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
 }
 
 func (m *Repository) Calculator(w http.ResponseWriter, r *http.Request) {
-	remoteIP := r.RemoteAddr
-	m.App.Session.Put(r.Context(), "remote_ip", remoteIP)
+	num1 := r.Form.Get("calc-1")
+	num2 := r.Form.Get("calc-2")
+	result := calculator.Add(num1, num2)
+	fmt.Println(result)
 
 	render.Template(w, "calculator.page.tmpl", &models.TemplateData{})
 }
