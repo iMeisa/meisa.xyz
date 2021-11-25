@@ -1,0 +1,26 @@
+{{template "base" .}}
+
+{{define "content"}}
+    <div class="container calculator">
+        <div class="row">
+            <div class="col">
+                <h1>Calculator</h1>
+            </div>
+        </div>
+        <div class="row mt-4 mb-2">
+            <div class="col-lg-4"></div>
+            <div class="col-lg-4">
+                <div class="input-group">
+                    <input type="number" class="form-control" placeholder="1" aria-label="2">
+                    <span class="input-group-text">+</span>
+                    <input type="number" class="form-control" placeholder="2" aria-label="3">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button class="btn btn-success add-button">Add</button>
+            </div>
+        </div>
+    </div>
+{{end}}
