@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"fmt"
 	"github.com/iMeisa/meisa.xyz/pkg/apps/calculator"
 	"github.com/iMeisa/meisa.xyz/pkg/config"
 	"github.com/iMeisa/meisa.xyz/pkg/models"
@@ -57,9 +56,7 @@ func (m *Repository) Calculator(w http.ResponseWriter, r *http.Request) {
 func (m *Repository) PostCalculator(w http.ResponseWriter, r *http.Request) {
 	num1 := r.Form.Get("calc-1")
 	num2 := r.Form.Get("calc-2")
-	fmt.Println(num1, num2)
 	result := calculator.Add(num1, num2)
-	fmt.Println(result)
 
 	stringMap := make(map[string]string)
 	stringMap["calcResult"] = result
