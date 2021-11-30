@@ -1,7 +1,7 @@
 package handlers
 
 import (
-	"github.com/iMeisa/meisa.xyz/pkg/apps/calculator"
+	"github.com/iMeisa/meisa.xyz/apps/calculator"
 	"github.com/iMeisa/meisa.xyz/pkg/config"
 	"github.com/iMeisa/meisa.xyz/pkg/models"
 	"github.com/iMeisa/meisa.xyz/pkg/render"
@@ -64,4 +64,8 @@ func (m *Repository) PostCalculator(w http.ResponseWriter, r *http.Request) {
 	render.Template(w, r, "calculator.page.tmpl", &models.TemplateData{
 		StringMap: stringMap,
 	})
+}
+
+func (m *Repository) Morse(w http.ResponseWriter, r *http.Request) {
+	render.Template(w, r, "morse.page.tmpl", &models.TemplateData{})
 }
