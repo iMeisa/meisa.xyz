@@ -1,75 +1,47 @@
 {{template "base" .}}
 
-
-{{define "title"}}
-    Morse Code
-{{end}}
+{{define "title"}}Morse Code{{end}}
 
 {{define "head"}}
-
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://code.getmdl.io/1.2.0/material.indigo-pink.min.css">
-    <script defer src="https://code.getmdl.io/1.2.0/material.min.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <!-- Contains dictionary of characters to morse code -->
     <script defer src="/static/js/morse/morse_code_dict.js"></script>
     <script src="/static/js/morse/Tone.min.js"></script>
 {{end}}
 
 {{define "content"}}
-    <div align="center">
+    <div class="container-fluid">
         <h1>Morse Code</h1>
-        <div>
-            <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" onclick="tone_dit(Tone.now())">
-                <i id="dot" class="material-icons">fiber_manual_record</i>
-                <div class="mdl-tooltip" data-mdl-for="dot">Dot sound</div>
-            </button>
-            <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" onclick="tone_dah(Tone.now())">
-                <i id="dash" class="material-icons">remove</i>
-                <div class="mdl-tooltip" data-mdl-for="dash">Dash sound</div>
-            </button>
-        </div>
-        <br/>
-        <div>
-            <!-- Simple Textfield -->
-            <div class="mdl-textfield mdl-js-textfield">
-                <input class="mdl-textfield__input" type="text" id="input_msg" value="Hello World" onblur="stop_morse()"
-                       autocomplete="off">
-                <label class="mdl-textfield__label" for="input_msg">Write message here...</label>
+        <br>
+        <div class="row">
+            <div class="col">
+                <label for="input_msg"></label>
+                <input class="bg-dark text-white border-dark py-2" type="text" id="input_msg"
+                       placeholder="Write message here..." value="Hello World">
+                <button type="button" id="play" class="btn btn-success" onclick="play_morse_sequence();">
+                    Play Morse Sequence
+                </button>
+                <button class="btn btn-danger" onclick="stop_morse();">
+                    Stop
+                </button>
             </div>
-            <button id="play" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
-                    onclick="play_morse_sequence();">
-                Play Morse Sequence
-            </button>
-            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
-                    onclick="stop_morse();">
-                Stop
-            </button>
         </div>
-        <br/>
-        <div>
-            <!-- Simple MDL Progress Bar -->
-            <div id="p1" class="mdl-progress mdl-js-progress"></div>
+        <br>
+        <div class="row">
+            <div class="col-lg-4"></div>
+            <div class="col-lg-4">
+                <div class="progress">
+                    <div class="progress-bar" id="progress-bar" role="progressbar" aria-valuemin="0"
+                         aria-valuemax="75"></div>
+                </div>
+            </div>
         </div>
         <br/>
         <p id="msg"></p>
         <pre id="morse" style="overflow: auto;"></pre>
 
         <br/>
-        <!-- To github -->
-        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored"
-                onclick="parent.location='https://github.com/Elucidation/MorsePy'">
-            <i id="git_link" class="material-icons">code</i>
-            <div class="mdl-tooltip" data-mdl-for="git_link">Go to GitHub Repository</div>
-        </button>
-
-        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" onclick="parent.location='..'">
-            <i id="home_link" class="material-icons">arrow_upward</i>
-            <div class="mdl-tooltip" data-mdl-for="home_link">Go to Home Page</div>
-        </button>
     </div>
-    
+
     <div class="container mt-4">
         <div class="col">
             <a href="https://www.tetralark.com/MorsePy/" style="color: #888">Original Site</a>
@@ -81,7 +53,7 @@
 {{define "js"}}
     <script defer type="text/javascript">
 
-        activateNav('morse')
+        activateNav('nav-morse')
 
         // Given string, returns list of chars converted to morse code
         // ex.
@@ -126,7 +98,8 @@
             tone_fin();
             clearMsgText();
             clearMorseText();
-            document.querySelector('#p1').MaterialProgress.setProgress(0);
+            // document.querySelector('#p1').MaterialProgress.setProgress(0);
+            document.getElementById("progress-bar").style.width = "0%"
         }
 
         // The Morse Code tone to use, 800Hz sine wave
@@ -189,7 +162,8 @@
 
             let tone_updateProgress = function (time, pos) {
                 let ratio = 100 * pos / total_length;
-                document.querySelector('#p1').MaterialProgress.setProgress(ratio);
+                // document.querySelector('#p1').MaterialProgress.setProgress(ratio);
+                document.getElementById("progress-bar").style.width = ratio.toString() + '%'
             }
 
             // Generate sequence
