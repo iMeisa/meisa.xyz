@@ -51,7 +51,7 @@
 
 
 {{define "js"}}
-    <script defer type="text/javascript">
+    <script>
 
         activateNav('nav-morse')
 
@@ -120,7 +120,7 @@
         }
 
         let tone_word_space = function (time) {
-            addMorseText('<br />');
+            addMorseText('<br>');
         }
 
         let tone_letter_space = function (time) {
@@ -161,8 +161,7 @@
             let total_length = morse.join('').length - 1;
 
             let tone_updateProgress = function (time, pos) {
-                let ratio = 100 * pos / total_length;
-                // document.querySelector('#p1').MaterialProgress.setProgress(ratio);
+                let ratio = 100 * pos / total_length
                 document.getElementById("progress-bar").style.width = ratio.toString() + '%'
             }
 
@@ -175,7 +174,7 @@
                 let word = code[i]; // morse code word
 
                 // If the word is just a space, handle differently
-                if (word === ' ') {
+                if (word === '!') {
                     // Push word space
                     seq.push({"time": t, "func": tone_word_space});
                     t += space_time;
