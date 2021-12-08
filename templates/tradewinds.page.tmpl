@@ -262,6 +262,9 @@
                 const item_name = items[index]
 
                 document.getElementById(`${item_name}-price`).value = ''
+                let item_profit = document.getElementById(`${item_name}-profit`)
+                item_profit.innerHTML = '0'
+                item_profit.style.color = 'white'
             }
         }
     </script>
