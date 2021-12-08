@@ -5,6 +5,10 @@
 {{define "head"}}
     <style>
         @font-face {
+            font-family: Dovahzul;
+            src:url("/static/fonts/Dovahkiin.otf") format('opentype');
+        }
+        @font-face {
             font-family: Sheikah;
             src: url("/static/fonts/sheikah-complete.otf") format('opentype');
         }
@@ -42,7 +46,7 @@
     <script>
         activateNav('nav-transcriber')
 
-        const font_list = ['Sheikah']
+        const font_list = ['Dovahzul', 'Sheikah']
 
         let font_select = document.getElementById('font-select')
         for (const index in font_list) {
