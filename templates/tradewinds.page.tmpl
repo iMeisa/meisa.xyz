@@ -237,6 +237,7 @@
 
                 const item_price = document.getElementById(`${item_name}-price`)
                 const item_value = item_price.value
+                if (item_value < 10) {continue}
                 let item_value_max = document.getElementById(`${item_name}-contraband`).hasAttribute('checked') ? contraband_max[item_name] : max_values[item_name]
 
                 const used_storage = document.getElementById(`used-space`).value
