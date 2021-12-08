@@ -69,3 +69,7 @@ func (m *Repository) PostCalculator(w http.ResponseWriter, r *http.Request) {
 func (m *Repository) Morse(w http.ResponseWriter, r *http.Request) {
 	render.Template(w, r, "morse.page.tmpl", &models.TemplateData{})
 }
+
+func (m *Repository) Tradewinds(w http.ResponseWriter, r *http.Request) {
+	render.Template(w, r, "tradewinds.page.tmpl", &models.TemplateData{})
+}

@@ -1,0 +1,240 @@
+{{template "base" .}}
+
+{{define "title"}}Tradewinds Calculator{{end}}
+
+{{define "content"}}
+    <div class="container">
+
+        <div class="row">
+            <div class="col">
+                <table class="table table-dark table-bordered">
+                    <thead>
+                    <tr>
+                        <th scope="col" id="item-name">Item</th>
+                        <th scope="col" id="item-price">Price (Max)</th>
+                        <th scope="col" id="item-contraband">Contra band</th>
+                        <th scope="col" id="item-profit">Potential Profit</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Salt</td>
+                        <td class="input-group">
+                            <input type="number" class="form-control bg-dark text-white" id="salt-price"
+                                   aria-describedby="salt-max">
+                            <span class="input-group-text bg-dark text-white" id="salt-max">(90)</span>
+                        </td>
+                        <td><input type="checkbox" id="salt-contraband" disabled></td>
+                        <td><p id="salt-profit">0</p></td>
+                    </tr>
+                    <tr>
+                        <td>Tea</td>
+                        <td class="input-group">
+                            <input type="number" class="form-control bg-dark text-white" id="tea-price"
+                                   aria-describedby="tea-max">
+                            <span class="input-group-text bg-dark text-white" id="tea-max">(90)</span>
+                        </td>
+                        <td><input type="checkbox" id="tea-contraband" disabled></td>
+                        <td><p id="tea-profit">0</p></td>
+                    </tr>
+                    <tr>
+                        <td>Wine</td>
+                        <td class="input-group">
+                            <input type="number" class="form-control bg-dark text-white" id="wine-price"
+                                   aria-describedby="wine-max">
+                            <span class="input-group-text bg-dark text-white" id="wine-max">(90)</span>
+                        </td>
+                        <td><input type="checkbox" id="wine-contraband" disabled></td>
+                        <td><p id="wine-profit">0</p></td>
+                    </tr>
+                    <tr>
+                        <td>Amber</td>
+                        <td class="input-group">
+                            <input type="number" class="form-control bg-dark text-white" id="amber-price"
+                                   aria-describedby="amber-max">
+                            <span class="input-group-text bg-dark text-white" id="amber-max">(90)</span>
+                        </td>
+                        <td><input type="checkbox" id="amber-contraband" disabled></td>
+                        <td><p id="amber-profit">0</p></td>
+                    </tr>
+                    <tr>
+                        <td>Oil</td>
+                        <td class="input-group">
+                            <input type="number" class="form-control bg-dark text-white" id="oil-price"
+                                   aria-describedby="oil-max">
+                            <span class="input-group-text bg-dark text-white" id="oil-max">(90)</span>
+                        </td>
+                        <td><input type="checkbox" id="oil-contraband" disabled></td>
+                        <td><p id="oil-profit">0</p></td>
+                    </tr>
+                    <tr>
+                        <td>Weapons</td>
+                        <td class="input-group">
+                            <input type="number" class="form-control bg-dark text-white" id="weapons-price"
+                                   aria-describedby="weapons-max">
+                            <span class="input-group-text bg-dark text-white" id="weapons-max">(90)</span>
+                        </td>
+                        <td><input type="checkbox" id="weapons-contraband" disabled></td>
+                        <td><p id="weapons-profit">0</p></td>
+                    </tr>
+                    <tr>
+                        <td>Parchment</td>
+                        <td class="input-group">
+                            <input type="number" class="form-control bg-dark text-white" id="parchment-price"
+                                   aria-describedby="parchment-max">
+                            <span class="input-group-text bg-dark text-white" id="parchment-max">(90)</span>
+                        </td>
+                        <td><input type="checkbox" id="parchment-contraband" disabled></td>
+                        <td><p id="parchment-profit">0</p></td>
+                    </tr>
+                    <tr>
+                        <td>Indigo</td>
+                        <td class="input-group">
+                            <input type="number" class="form-control bg-dark text-white" id="indigo-price"
+                                   aria-describedby="indigo-max">
+                            <span class="input-group-text bg-dark text-white" id="indigo-max">(90)</span>
+                        </td>
+                        <td><input type="checkbox" id="indigo-contraband" disabled></td>
+                        <td><p id="indigo-profit">0</p></td>
+                    </tr>
+                    <tr>
+                        <td>Rugs</td>
+                        <td class="input-group">
+                            <input type="number" class="form-control bg-dark text-white" id="rugs-price"
+                                   aria-describedby="rugs-max">
+                            <span class="input-group-text bg-dark text-white" id="rugs-max">(90)</span>
+                        </td>
+                        <td><input type="checkbox" id="rugs-contraband" oninput="toggleCheck('rugs'); fillMax()"></td>
+                        <td><p id="rugs-profit">0</p></td>
+                    </tr>
+                    <tr>
+                        <td>Gunpowder</td>
+                        <td class="input-group">
+                            <input type="number" class="form-control bg-dark text-white" id="gunpowder-price"
+                                   aria-describedby="gunpowder-max">
+                            <span class="input-group-text bg-dark text-white" id="gunpowder-max">(90)</span>
+                        </td>
+                        <td><input type="checkbox" id="gunpowder-contraband" oninput="toggleCheck('gunpowder'); fillMax()"></td>
+                        <td><p id="gunpowder-profit">0</p></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <h5>Storage</h5>
+            <div class="col-lg-4"></div>
+            <div class="col-lg-4">
+                <div class="input-group">
+                    <span class="input-group-text bg-dark text-white">Used</span>
+                    <input type="number" class="form-control bg-dark text-white" id="used-space" value="0">
+                    <span class="input-group-text bg-dark text-white">/</span>
+                    <input type="number" class="form-control bg-dark text-white" id="total-space" value="75">
+                    <span class="input-group-text bg-dark text-white">Total</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col">
+                <button class="btn btn-primary" id="calc-profit" onclick="calcProfit()">Calculate Profit</button>
+            </div>
+        </div>
+    </div>
+{{end}}
+
+{{define "css"}}
+    <style>
+        table span {
+            width: 7em;
+            text-align: center;
+        }
+    </style>
+{{end}}
+
+{{define "js"}}
+    <script>
+        activateNav('nav-tradewinds')
+
+        let items = [
+            'salt',
+            'tea',
+            'wine',
+            'amber',
+            'oil',
+            'weapons',
+            'parchment',
+            'indigo',
+            'rugs',
+            'gunpowder'
+        ]
+
+        let max_values = {
+            "salt": 90,
+            "tea": 135,
+            "wine": 200,
+            "amber": 625,
+            "oil": 1150,
+            "weapons": 3000,
+            "parchment": 6450,
+            "indigo": 7750,
+            "rugs": 8000,
+            "gunpowder": 9000
+        }
+
+        let contraband_max = {
+            "rugs": 16000,
+            "gunpowder": 17000
+        }
+
+        for (const index in items) {
+            const item_name = items[index]
+
+            let item_contraband = document.getElementById(`${item_name}-contraband`)
+            item_contraband.removeAttribute('checked')
+        }
+
+        fillMax()
+
+        function fillMax() {
+            for (const index in items) {
+                const item_name = items[index]
+
+                let item_contraband = document.getElementById(`${item_name}-contraband`).hasAttribute('checked')
+                let item_max = max_values[item_name]
+                if (item_contraband) {
+                    item_max = contraband_max[item_name]
+                }
+
+
+                document.getElementById(`${item_name}-max`).innerHTML = `(${item_max})`
+            }
+        }
+
+        function toggleCheck(item_name) {
+            let item = document.getElementById(`${item_name}-contraband`)
+
+            if (item.hasAttribute('checked')) {item.removeAttribute('checked')}
+            else {item.setAttribute('checked', '')}
+        }
+
+        function calcProfit(){
+            for (const index in items) {
+                const item_name = items[index]
+
+                const item_price = document.getElementById(`${item_name}-price`)
+                const item_value = item_price.value
+                let item_value_max = document.getElementById(`${item_name}-contraband`).hasAttribute('checked') ? contraband_max[item_name] : max_values[item_name]
+
+                const used_storage = document.getElementById(`used-space`).value
+                const total_storage = document.getElementById('total-space').value
+                const available_storage = total_storage - used_storage
+
+                const profit = (item_value_max * available_storage) - (item_value * available_storage)
+                document.getElementById(`${item_name}-profit`).innerHTML = profit.toLocaleString(undefined)
+            }
+        }
+    </script>
+{{end}}
