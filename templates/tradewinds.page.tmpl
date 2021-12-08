@@ -123,13 +123,13 @@
             </div>
         </div>
 
-        <div class="row mt-3">
+        <div class="row mt-1">
             <div class="col">
                 <button class="btn btn-outline-danger" onclick="clearPrices()">Clear Prices</button>
             </div>
         </div>
 
-        <div class="row mt-3">
+        <div class="row mt-4">
             <h5>Storage</h5>
             <div class="col-lg-4"></div>
             <div class="col-lg-4">
@@ -227,6 +227,9 @@
         }
 
         function calcProfit(){
+            let highest_profit_price = ''
+            let highest_profit_item = ''
+
             for (const index in items) {
                 const item_name = items[index]
 
@@ -239,8 +242,17 @@
                 const available_storage = total_storage - used_storage
 
                 const profit = (item_value_max * available_storage) - (item_value * available_storage)
-                document.getElementById(`${item_name}-profit`).innerHTML = profit.toLocaleString(undefined)
+                let profit_text = document.getElementById(`${item_name}-profit`)
+                profit_text.innerHTML = profit.toLocaleString(undefined)
+                profit_text.style.color = 'white'
+
+                if (profit > highest_profit_price) {
+                    highest_profit_price = profit
+                    highest_profit_item = item_name
+                }
             }
+
+            document.getElementById(`${highest_profit_item}-profit`).style.color = 'green'
         }
         
         function clearPrices(){
