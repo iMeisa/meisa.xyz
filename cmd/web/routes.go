@@ -23,6 +23,7 @@ func routes(_ *config.AppConfig) http.Handler {
 	mux.Post("/calculator", handlers.Repo.PostCalculator)
 	mux.Get("/morse", handlers.Repo.Morse)
 	mux.Get("/tradewinds", handlers.Repo.Tradewinds)
+	mux.Get("/transcriber", handlers.Repo.Transcriber)
 
 	// HTML static files location
 	fileServer := http.FileServer(http.Dir("./static/"))

@@ -73,3 +73,7 @@ func (m *Repository) Morse(w http.ResponseWriter, r *http.Request) {
 func (m *Repository) Tradewinds(w http.ResponseWriter, r *http.Request) {
 	render.Template(w, r, "tradewinds.page.tmpl", &models.TemplateData{})
 }
+
+func (m *Repository) Transcriber(w http.ResponseWriter, r *http.Request) {
+	render.Template(w, r, "transcriber.page.tmpl", &models.TemplateData{})
+}

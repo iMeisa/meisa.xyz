@@ -1,0 +1,62 @@
+{{template "base" .}}
+
+{{define "title"}}Transcriber{{end}}
+
+{{define "head"}}
+    <style>
+        @font-face {
+            font-family: Sheikah;
+            src: url("/static/fonts/sheikah-complete.otf") format('opentype');
+        }
+    </style>
+{{end}}
+
+{{define "content"}}
+    <div class="container">
+        <h1>Transcriber</h1>
+
+        <div class="row">
+            <div class="col-lg-4 offset-lg-4">
+                <div class="input-group">
+                    <select id="font-select" class="form-select" oninput="changeFont()">
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row my-3">
+            <div class="col-lg-6 offset-lg-3">
+                <textarea class="form-control" id="raw-text" placeholder="Write here" oninput="transcribe()"></textarea>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6 offset-lg-3">
+                <textarea class="form-control" id="transcribed-text" readonly></textarea>
+            </div>
+        </div>
+    </div>
+{{end}}
+
+{{define "js"}}
+    <script>
+        activateNav('nav-transcriber')
+
+        const font_list = ['Sheikah']
+
+        let font_select = document.getElementById('font-select')
+        for (const index in font_list) {
+            font_select.innerHTML += `<option value="${index}">${font_list[index]}</option>`
+        }
+
+        changeFont()
+
+        function transcribe() {
+            document.getElementById('transcribed-text').value = document.getElementById('raw-text').value
+        }
+
+        function changeFont() {
+            document.getElementById('transcribed-text').style.fontFamily = font_list[font_select.value]
+        }
+    </script>
+{{end}}
