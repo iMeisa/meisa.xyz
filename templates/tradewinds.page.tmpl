@@ -31,6 +31,17 @@
         </div>
 
         <div class="row mt-4">
+            <h5>Cash</h5>
+            <div class="col-lg-4"></div>
+            <div class="col-lg-4">
+                <div class="input-group">
+                    <input type="number" class="form-control bg-dark text-white" id="cash-total" value="5000">
+                    <span class="input-group-text bg-dark text-white">Dinar</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
             <h5>Storage</h5>
             <div class="col-lg-4"></div>
             <div class="col-lg-4">
@@ -156,19 +167,22 @@
             for (const index in items) {
                 const item_name = items[index]
 
-                const item_price = document.getElementById(`${item_name}-price`)
-                const item_value = item_price.value
-                if (item_value < 10) {
+                const item_price = document.getElementById(`${item_name}-price`).value
+                if (item_price < 10) {
                     continue
                 }
 
-                let item_value_max = document.getElementById(`${item_name}-contraband`).hasAttribute('checked') ? contraband_max[item_name] : max_values[item_name]
+                let item_max_price = document.getElementById(`${item_name}-contraband`).hasAttribute('checked') ? contraband_max[item_name] : max_values[item_name]
+
+                const cash_total = document.getElementById('cash-total').value
+                const max_purchaseable_quantity = Math.floor(cash_total / item_price)
 
                 const used_storage = document.getElementById(`used-space`).value
                 const total_storage = document.getElementById('total-space').value
                 const available_storage = total_storage - used_storage
 
-                const profit = (item_value_max * available_storage) - (item_value * available_storage)
+                const quantity = Math.min(available_storage, max_purchaseable_quantity)
+                const profit = (item_max_price * quantity) - (item_price * quantity)
                 let profit_text = document.getElementById(`${item_name}-profit`)
                 profit_text.innerHTML = profit.toLocaleString(undefined)
                 profit_text.style.color = 'white'
