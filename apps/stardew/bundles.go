@@ -51,7 +51,7 @@ func dbConnect() (*sql.DB, error) {
 	return db, nil
 }
 
-func QueryBundles() string {
+func QueryBundles() []BundleItem {
 	db, err := dbConnect()
 	if err != nil {
 		fmt.Println(err)

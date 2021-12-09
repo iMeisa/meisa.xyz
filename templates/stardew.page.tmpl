@@ -10,15 +10,15 @@
 
         <h1>Bundle Items</h1>
 
-        <div class="row">
-            <div class="col">
+        <div class="row mt-4">
+            <div class="col-lg-3"></div>
+            <div class="col-lg-6">
                 <table class="table table-dark table-bordered">
                     <thead>
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Item</th>
                         <th scope="col">Rarity</th>
-                        <th scope="col">Amount</th>
                         <th scope="col">Bundle Name</th>
                     </tr>
                     </thead>
@@ -33,12 +33,23 @@
 
 {{define "js"}}
     <script>
-        let write = document.getElementById('write-here')
-        write.innerHTML = {{.CSRFToken}};
-
         let table_item_list = document.getElementById('item-list')
-        let bundle_item_list = {{index .StringMap "items"}}
 
-        console.log(typeof bundle_item_list)
+        fetch('stardew-json')
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                for (const index in data) {
+                    let bundle_item = data[index]
+                    table_item_list.innerHTML += `
+                        <tr>
+                            <td>${bundle_item.id}</td>
+                            <td>${bundle_item.item_name}</td>
+                            <td>${bundle_item.rarity}</td>
+                            <td>${bundle_item.bundle_name}</td>
+                        </tr>
+                    `
+                }
+            })
     </script>
 {{end}}

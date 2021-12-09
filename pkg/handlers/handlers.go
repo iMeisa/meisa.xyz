@@ -1,6 +1,8 @@
 package handlers
 
 import (
+	"encoding/json"
+	"fmt"
 	"github.com/iMeisa/meisa.xyz/apps/calculator"
 	"github.com/iMeisa/meisa.xyz/apps/stardew"
 	"github.com/iMeisa/meisa.xyz/pkg/config"
@@ -72,13 +74,18 @@ func (m *Repository) Morse(w http.ResponseWriter, r *http.Request) {
 }
 
 func (m *Repository) Stardew(w http.ResponseWriter, r *http.Request) {
-	items := stardew.QueryBundles()
-	stringMap := make(map[string]string)
-	stringMap["items"] = items
+	render.Template(w, r, "stardew.page.tmpl", &models.TemplateData{})
+}
 
-	render.Template(w, r, "stardew.page.tmpl", &models.TemplateData{
-		StringMap: stringMap,
-	})
+func (m *Repository) StardewJSON(w http.ResponseWriter, r *http.Request) {
+	items := stardew.QueryBundles()
+
+	itemsJSON, err := json.MarshalIndent(items, "", "	")
+	if err != nil {
+		fmt.Println("Could not convert to JSON:", err)
+	}
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(itemsJSON)
 }
 
 func (m *Repository) Tradewinds(w http.ResponseWriter, r *http.Request) {
