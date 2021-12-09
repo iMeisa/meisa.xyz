@@ -36,6 +36,12 @@
             <div class="col-lg-4">
                 <div class="input-group">
                     <input type="number" class="form-control bg-dark text-white" id="cash-total" value="5000">
+                    <select id="cash-multiplier" class="form-select bg-dark text-white" style="width: 1px">
+                        <option value="0">Plain</option>
+                        <option value="1">Thousands</option>
+                        <option value="2">Millions</option>
+                        <option value="3">Billions</option>
+                    </select>
                     <span class="input-group-text bg-dark text-white">Dinar</span>
                 </div>
             </div>
@@ -174,7 +180,22 @@
 
                 let item_max_price = document.getElementById(`${item_name}-contraband`).hasAttribute('checked') ? contraband_max[item_name] : max_values[item_name]
 
-                const cash_total = document.getElementById('cash-total').value
+                let cash_total = document.getElementById('cash-total').value
+                const multiplier = document.getElementById('cash-multiplier').value
+                switch (multiplier) {
+                    case '1':
+                        cash_total *= 1000
+                        break
+                    case '2':
+                        cash_total *= 1000000
+                        break
+                    case '3':
+                        cash_total *= 1000000000
+                        break
+                    default:
+                        break
+                }
+
                 const max_purchaseable_quantity = Math.floor(cash_total / item_price)
 
                 const used_storage = document.getElementById(`used-space`).value
