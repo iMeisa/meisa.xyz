@@ -1,0 +1,44 @@
+{{template "base" .}}
+
+{{define "title"}}Stardew Tools{{end}}
+
+{{define "content"}}
+    <div class="container">
+        <div id="write-here">
+
+        </div>
+
+        <h1>Bundle Items</h1>
+
+        <div class="row">
+            <div class="col">
+                <table class="table table-dark table-bordered">
+                    <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Item</th>
+                        <th scope="col">Rarity</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Bundle Name</th>
+                    </tr>
+                    </thead>
+                    <tbody id="item-list">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{{end}}
+
+{{define "js"}}
+    <script>
+        let write = document.getElementById('write-here')
+        write.innerHTML = {{.CSRFToken}};
+
+        let table_item_list = document.getElementById('item-list')
+        let bundle_item_list = {{index .StringMap "items"}}
+
+        console.log(typeof bundle_item_list)
+    </script>
+{{end}}

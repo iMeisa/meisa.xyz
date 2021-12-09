@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"github.com/iMeisa/meisa.xyz/apps/calculator"
+	"github.com/iMeisa/meisa.xyz/apps/stardew"
 	"github.com/iMeisa/meisa.xyz/pkg/config"
 	"github.com/iMeisa/meisa.xyz/pkg/models"
 	"github.com/iMeisa/meisa.xyz/pkg/render"
@@ -68,6 +69,16 @@ func (m *Repository) PostCalculator(w http.ResponseWriter, r *http.Request) {
 
 func (m *Repository) Morse(w http.ResponseWriter, r *http.Request) {
 	render.Template(w, r, "morse.page.tmpl", &models.TemplateData{})
+}
+
+func (m *Repository) Stardew(w http.ResponseWriter, r *http.Request) {
+	items := stardew.QueryBundles()
+	stringMap := make(map[string]string)
+	stringMap["items"] = items
+
+	render.Template(w, r, "stardew.page.tmpl", &models.TemplateData{
+		StringMap: stringMap,
+	})
 }
 
 func (m *Repository) Tradewinds(w http.ResponseWriter, r *http.Request) {
