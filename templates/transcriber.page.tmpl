@@ -13,6 +13,10 @@
             src: url("/static/fonts/hylian.otf") format('opentype');
         }
         @font-face {
+            font-family: Orokin;
+            src: url("/static/fonts/orokin.otf") format('opentype');
+        }
+        @font-face {
             font-family: Sheikah;
             src: url("/static/fonts/sheikah-complete.otf") format('opentype');
         }
@@ -51,7 +55,7 @@
     <script>
         activateNav('nav-transcriber')
 
-        const font_list = ['Dovahzul', 'Hylian', 'Sheikah']
+        const font_list = ['Dovahzul', 'Hylian', 'Orokin', 'Sheikah']
 
         let font_select = document.getElementById('font-select')
         for (const index in font_list) {
