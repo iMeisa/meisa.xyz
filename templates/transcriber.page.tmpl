@@ -9,6 +9,10 @@
             src:url("/static/fonts/Dovahkiin.otf") format('opentype');
         }
         @font-face {
+            font-family: Hylian;
+            src: url("/static/fonts/hylian.otf") format('opentype');
+        }
+        @font-face {
             font-family: Sheikah;
             src: url("/static/fonts/sheikah-complete.otf") format('opentype');
         }
@@ -19,7 +23,7 @@
     <div class="container">
         <h1>Transcriber</h1>
 
-        <div class="row">
+        <div class="row mt-3">
             <div class="col-lg-4 offset-lg-4">
                 <div class="input-group">
                     <select id="font-select" class="form-select" oninput="changeFont()">
@@ -28,8 +32,9 @@
             </div>
         </div>
 
-        <div class="row my-3">
+        <div class="row mb-3">
             <div class="col-lg-6 offset-lg-3">
+                <hr>
                 <textarea class="form-control" id="raw-text" placeholder="Write here" oninput="transcribe()"></textarea>
             </div>
         </div>
@@ -46,7 +51,7 @@
     <script>
         activateNav('nav-transcriber')
 
-        const font_list = ['Dovahzul', 'Sheikah']
+        const font_list = ['Dovahzul', 'Hylian', 'Sheikah']
 
         let font_select = document.getElementById('font-select')
         for (const index in font_list) {
