@@ -3,8 +3,8 @@ package render
 import (
 	"bytes"
 	"fmt"
-	"github.com/iMeisa/meisa.xyz/pkg/config"
-	"github.com/iMeisa/meisa.xyz/pkg/models"
+	"github.com/iMeisa/meisa.xyz/internal/config"
+	"github.com/iMeisa/meisa.xyz/internal/models"
 	"github.com/justinas/nosurf"
 	"html/template"
 	"log"

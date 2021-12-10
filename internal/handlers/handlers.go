@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"github.com/iMeisa/meisa.xyz/apps/calculator"
 	"github.com/iMeisa/meisa.xyz/apps/stardew"
-	"github.com/iMeisa/meisa.xyz/pkg/config"
-	"github.com/iMeisa/meisa.xyz/pkg/models"
-	"github.com/iMeisa/meisa.xyz/pkg/render"
+	"github.com/iMeisa/meisa.xyz/internal/config"
+	"github.com/iMeisa/meisa.xyz/internal/models"
+	"github.com/iMeisa/meisa.xyz/internal/render"
 	"net/http"
 )
 

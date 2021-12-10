@@ -3,8 +3,8 @@ package main
 import (
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
-	"github.com/iMeisa/meisa.xyz/pkg/config"
-	"github.com/iMeisa/meisa.xyz/pkg/handlers"
+	"github.com/iMeisa/meisa.xyz/internal/config"
+	"github.com/iMeisa/meisa.xyz/internal/handlers"
 	"net/http"
 )
 
