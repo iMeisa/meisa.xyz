@@ -23,7 +23,7 @@ func routes(_ *config.AppConfig) http.Handler {
 	mux.Post("/calculator", handlers.Repo.PostCalculator)
 	mux.Get("/morse", handlers.Repo.Morse)
 	mux.Get("/stardew", handlers.Repo.Stardew)
-	mux.Get("/stardew-json", handlers.Repo.StardewJSON)
+	mux.Post("/stardew-json", handlers.Repo.StardewJSON)
 	mux.Get("/tradewinds", handlers.Repo.Tradewinds)
 	mux.Get("/transcriber", handlers.Repo.Transcriber)
 
