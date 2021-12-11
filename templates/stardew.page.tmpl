@@ -12,31 +12,35 @@
 
         <div class="row mt-4">
             <div class="col">
-                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Add Item</button>
+                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addItemModal">Add Item</button>
             </div>
         </div>
 
-        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog">
+        <div class="modal fade" id="addItemModal" tabindex="-1" aria-labelledby="addItemModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
                 <div class="modal-content bg-dark">
                     <div class="modal-header bg-dark">
-                        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <h5 class="modal-title" id="addItemModalLabel">Add Item</h5>
                     </div>
                     <div class="modal-body bg-dark">
-                        Hello
+                        <form action="" method="post" id="add-item">
+                            <label for="add-item-name">Item Name</label>
+                            <input type="text" class="form-control bg-dark text-white" id="add-item-name">
+
+                            <label for="add-item-rarity">Item Rarity</label>
+                            <input type="text" class="form-control bg-dark text-white" id="add-item-rarity">
+
+                            <label for="add-item-bundle-name">Bundle Name</label>
+                            <input type="text" class="form-control bg-dark text-white" id="add-item-bundle-name">
+                        </form>
+
+                        <div class="alert alert-success mt-3" role="alert" id="item-success" hidden>Added Item</div>
                     </div>
                     <div class="modal-footer bg-dark">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Understood</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="clearAddItem()">Close</button>
+                        <button type="button" class="btn btn-success" onclick="addItem()">Submit</button>
                     </div>
                 </div>
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col">
-                <form action="" method="post" id="some-form"></form>
             </div>
         </div>
 
@@ -65,7 +69,7 @@
     <script>
         let table_item_list = document.getElementById('item-list')
 
-        let form = document.getElementById("some-form")
+        let form = document.getElementById("add-item")
         let form_data = new FormData(form)
         form_data.append("csrf_token", "{{.CSRFToken}}")
 
@@ -88,5 +92,54 @@
                     `
                 }
             })
+
+        function validateInput(input_element) {
+            if (input_element.value.length < 1) {
+                console.log('invalid')
+                input_element.classList.remove('border-success')
+                input_element.classList.add('border-danger')
+                return false
+            }
+
+            console.log('valid')
+            input_element.classList.remove('border-danger')
+            input_element.classList.add('border-success')
+            return true
+        }
+
+        function addItem() {
+            let item_name = document.getElementById('add-item-name')
+            let item_rarity = document.getElementById('add-item-rarity')
+            let bundle_name = document.getElementById('add-item-bundle-name')
+
+            let valid_inputs = validateInput(item_name) && validateInput(item_rarity)
+
+            let success_alert = document.getElementById('item-success')
+
+            if (valid_inputs) {
+                success_alert.removeAttribute('hidden')
+            }
+        }
+
+        function clearAddItem() {
+            let item_name = document.getElementById('add-item-name')
+            let item_rarity = document.getElementById('add-item-rarity')
+            let bundle_name = document.getElementById('add-item-bundle-name')
+
+            item_name.value = ''
+            item_rarity.value = ''
+            bundle_name.value = ''
+            
+            item_name.classList.remove('border-success')
+            item_rarity.classList.remove('border-success')
+            bundle_name.classList.remove('border-success')
+            
+            item_name.classList.remove('border-danger')
+            item_rarity.classList.remove('border-danger')
+            bundle_name.classList.remove('border-danger')
+            
+            let success_alert = document.getElementById('item-success')
+            success_alert.setAttribute('hidden', '')
+        }
     </script>
 {{end}}
