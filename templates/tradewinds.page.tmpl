@@ -167,6 +167,8 @@
         }
 
         function calcProfit() {
+            clearProfit()
+
             let highest_profit_price = ''
             let highest_profit_item = ''
 
@@ -222,6 +224,15 @@
                 const item_name = items[index]
 
                 document.getElementById(`${item_name}-price`).value = ''
+            }
+
+            clearProfit()
+        }
+
+        function clearProfit() {
+            for (const index in items) {
+                const item_name = items[index]
+
                 let item_profit = document.getElementById(`${item_name}-profit`)
                 item_profit.innerHTML = '0'
                 item_profit.style.color = 'white'
