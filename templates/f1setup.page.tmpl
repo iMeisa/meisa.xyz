@@ -4,7 +4,10 @@
 
 {{define "content"}}
     <div class="container">
-        <table class="table table-dark table-responsive table-aero">
+
+        <h1 class="mb-4">F1 Setup Helper</h1>
+
+        <table class="table table-dark table-responsive table-aero mt-4 mb-4">
             <tbody>
             <tr class="front-wing">
                 <td class="part-name">Front Wing</td>
@@ -29,7 +32,7 @@
             </tbody>
         </table>
 
-        <table class="table table-dark table-responsive table-transmission">
+        <table class="table table-dark table-responsive table-transmission mt-4 mb-4">
             <tbody>
             <tr class="on-throttle">
                 <td class="part-name">On Throttle</td>
@@ -55,14 +58,58 @@
 
         </table>
 
-        <table class="table table-dark table-responsive table-suspension-geo">
+        <table class="table table-dark table-responsive table-suspension-geo mt-4 mb-4">
             <tbody>
-            <tr class="part-name">sus-geo</tr>
+
+            <tr class="front-camber">
+                <td class="part-name">Front Camber</td>
+                <td class="part-setup">
+                    <div class="progress">
+                        <div class="progress-bar" style="width: 100%"></div>
+                    </div>
+                    -2.50
+                </td>
+                <td class="part-desc">Min -3.50 - -2.50 Max</td>
+            </tr>
+
+            <tr class="rear-camber">
+                <td class="part-name">Rear Camber</td>
+                <td class="part-setup">
+                    <div class="progress">
+                        <div class="progress-bar" style="width: 0"></div>
+                    </div>
+                    -2.00
+                </td>
+                <td class="part-desc">Min -2.00 - -1.00 Max</td>
+            </tr>
+
+            <tr class="front-toe">
+                <td class="part-name">Front Toe</td>
+                <td class="part-setup">
+                    <div class="progress">
+                        <div class="progress-bar" style="width: 10%"></div>
+                    </div>
+                    0.06
+                </td>
+                <td class="part-desc">Min 0.05 - 0.15 Max</td>
+            </tr>
+
+            <tr class="rear-toe">
+                <td class="part-name">Rear Toe</td>
+                <td class="part-setup">
+                    <div class="progress">
+                        <div class="progress-bar" style="width: 0"></div>
+                    </div>
+                    0.20
+                </td>
+                <td class="part-desc">Min 0.20 - 0.50 Max</td>
+            </tr>
+
             </tbody>
 
         </table>
 
-        <table class="table table-dark table-responsive table-suspension">
+        <table class="table table-dark table-responsive table-suspension mt-4 mb-4">
             <tbody>
             <tr>
                 <td class="part-name">Front Suspension</td>
@@ -72,21 +119,21 @@
                         <div class="progress-bar increase-setup" style="width: 10%"></div>
                         <div class="progress-bar decrease-setup" style="width: 10%"></div>
                     </div>
-                    2 -> 1
+                    <span> 2 -> 1 </span>
                 </td>
                 <td class="part-desc">Soft 1 - 11 Firm</td>
             </tr>
             </tbody>
         </table>
 
-        <table class="table table-dark table-brakes">
+        <table class="table table-dark table-brakes mt-4 mb-4">
             <tbody>
             <tr class="part-name">brakes</tr>
             </tbody>
 
         </table>
 
-        <table class="table table-dark table-tires">
+        <table class="table table-dark table-tires mt-4 mb-4">
             <tbody>
             <tr class="part-name">tires</tr>
             </tbody>
