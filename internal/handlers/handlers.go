@@ -69,6 +69,10 @@ func (m *Repository) PostCalculator(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
+func (m *Repository) F1Setup(w http.ResponseWriter, r *http.Request) {
+	render.Template(w, r, "f1setup.page.tmpl", &models.TemplateData{})
+}
+
 func (m *Repository) Morse(w http.ResponseWriter, r *http.Request) {
 	render.Template(w, r, "morse.page.tmpl", &models.TemplateData{})
 }
