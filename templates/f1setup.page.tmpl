@@ -4,16 +4,99 @@
 
 {{define "content"}}
     <div class="container">
-        hello
+        <table class="table table-dark table-aero">
+            <tbody>
+            <tr>aero</tr>
+            </tbody>
+        </table>
+
+        <table class="table table-dark table-transmission">
+            <tbody>
+            <tr>transmission</tr>
+            </tbody>
+
+        </table>
+
+        <table class="table table-dark table-suspension-geo">
+            <tbody>
+            <tr>sus-geo</tr>
+            </tbody>
+
+        </table>
+
+        <table class="table table-dark table-suspension">
+            <tbody>
+            <tr>
+                <td>Front Suspension</td>
+                <td>
+                    <div class="progress">
+                        <div class="progress-bar" style="width: 20%"></div>
+                        <div class="progress-bar increase-setup" style="width: 10%"></div>
+                        <div class="progress-bar decrease-setup" style="width: 10%"></div>
+                    </div>
+                    2 -> 1
+                </td>
+                <td>Soft 1 - 11 Firm</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-dark table-brakes">
+            <tbody>
+            <tr>brakes</tr>
+            </tbody>
+
+        </table>
+
+        <table class="table table-dark table-tires">
+            <tbody>
+            <tr>tires</tr>
+            </tbody>
+
+        </table>
     </div>
 {{end}}
 
 
 {{define "css"}}
+    <style>
+        .increase-setup {
+            background-color: lawngreen;
+        }
 
+        .decrease-setup {
+            background-color: red;
+        }
+
+    </style>
 {{end}}
 
 
 {{define "js"}}
+
+    <script>
+        let default_setup = {
+            "front-wing": 6,
+            "rear-wing": 9,
+            "on-throttle": 70,
+            "off-throttle": 55,
+            "front-camber": -2.50,
+            "rear-camber": -2.00,
+            "front-toe": 0.06,
+            "rear-toe": 0.20,
+            "front-suspension": 2,
+            "rear-suspension": 5,
+            "front-roll": 2,
+            "rear-roll": 5,
+            "front-height": 2,
+            "rear-height": 6,
+            "brake-pressure": 92,
+            "brake-bias": 58,
+            "front-right-tire": 21.4,
+            "front-left-tire": 21.4,
+            "rear-right-tire": 22.3,
+            "rear-left-tire": 22.3
+        }
+    </script>
 
 {{end}}
