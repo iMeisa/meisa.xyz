@@ -6,7 +6,8 @@
       "max-name": "Max",
       "min-value": 1,
       "max-value": 11,
-      "default": 6
+      "default": 6,
+      "step": 1
     },
     "rear-wing": {
       "name": "Rear Wing",
@@ -14,7 +15,8 @@
       "max-name": "Max",
       "min-value": 1,
       "max-value": 11,
-      "default": 9
+      "default": 9,
+      "step": 1
     }
   },
   "transmission": {
@@ -24,7 +26,8 @@
       "max-name": "Locked",
       "min-value": 50,
       "max-value": 100,
-      "default": 70
+      "default": 70,
+      "step": 1
     },
     "off-throttle": {
       "name": "Differential Off Throttle",
@@ -32,7 +35,8 @@
       "max-name": "Locked",
       "min-value": 50,
       "max-value": 100,
-      "default": 55
+      "default": 55,
+      "step": 1
     }
   },
   "suspension-geo": {
@@ -42,7 +46,8 @@
       "max-name": "Max",
       "min-value": -3.50,
       "max-value": -2.50,
-      "default": -2.50
+      "default": -2.50,
+      "step": 0.1
     },
     "rear-camber": {
       "name": "Rear Camber",
@@ -50,7 +55,8 @@
       "max-name": "Max",
       "min-value": -2.00,
       "max-value": -1.00,
-      "default": -2.00
+      "default": -2.00,
+      "step": 0.1
     },
     "front-toe": {
       "name": "Front Toe",
@@ -58,7 +64,8 @@
       "max-name": "Max",
       "min-value": 0.05,
       "max-value": 0.15,
-      "default": 0.06
+      "default": 0.06,
+      "step": 0.01
     },
     "rear-toe": {
       "name": "Rear Toe",
@@ -66,7 +73,8 @@
       "max-name": "Max",
       "min-value": 0.20,
       "max-value": 0.50,
-      "default": 0.20
+      "default": 0.20,
+      "step": 0.03
     }
   },
   "suspension": {
@@ -76,7 +84,8 @@
       "max-name": "Firm",
       "min-value": 1,
       "max-value": 11,
-      "default": 2
+      "default": 2,
+      "step": 1
     },
     "rear-suspension": {
       "name": "Rear Suspension",
@@ -84,7 +93,8 @@
       "max-name": "Firm",
       "min-value": 1,
       "max-value": 11,
-      "default": 5
+      "default": 5,
+      "step": 1
     },
     "front-roll": {
       "name": "Front Anti-Roll Bar",
@@ -92,7 +102,8 @@
       "max-name": "Firm",
       "min-value": 1,
       "max-value": 11,
-      "default": 2
+      "default": 2,
+      "step": 1
     },
     "rear-roll": {
       "name": "Rear Anti-Roll Bar",
@@ -100,7 +111,8 @@
       "max-name": "Firm",
       "min-value": 1,
       "max-value": 11,
-      "default": 5
+      "default": 5,
+      "step": 1
     },
     "front-height": {
       "name": "Front Ride Height",
@@ -108,7 +120,8 @@
       "max-name": "Max",
       "min-value": 1,
       "max-value": 11,
-      "default": 2
+      "default": 2,
+      "step": 1
     },
     "rear-height": {
       "name": "Rear Ride Height",
@@ -116,7 +129,8 @@
       "max-name": "Max",
       "min-value": 1,
       "max-value": 11,
-      "default": 6
+      "default": 6,
+      "step": 1
     }
   },
   "brakes": {
@@ -126,7 +140,8 @@
       "max-name": "Max",
       "min-value": 50,
       "max-value": 100,
-      "default": 92
+      "default": 92,
+      "step": 1
     },
     "brake-bias": {
       "name": "Front Brake Bias",
@@ -134,7 +149,8 @@
       "max-name": "Rear",
       "min-value": 70,
       "max-value": 50,
-      "default": 52
+      "default": 52,
+      "step": 1
     }
   },
   "tires": {
@@ -144,7 +160,8 @@
       "max-name": "PSI",
       "min-value": 21.0,
       "max-value": 25.0,
-      "default": 21.4
+      "default": 21.4,
+      "step": 0.4
     },
     "front-left-tire": {
       "name": "Front Left Tire",
@@ -152,7 +169,8 @@
       "max-name": "PSI",
       "min-value": 21.0,
       "max-value": 25.0,
-      "default": 21.4
+      "default": 21.4,
+      "step": 0.4
     },
     "rear-right-tire": {
       "name": "Rear Right Tire",
@@ -160,7 +178,8 @@
       "max-name": "PSI",
       "min-value": 19.5,
       "max-value": 23.5,
-      "default": 22.3
+      "default": 22.3,
+      "step": 0.4
     },
     "rear-left-tire": {
       "name": "Rear Left Tire",
@@ -168,7 +187,8 @@
       "max-name": "PSI",
       "min-value": 19.5,
       "max-value": 23.5,
-      "default": 22.3
+      "default": 22.3,
+      "step": 0.4
     }
   }
 }
