@@ -69,7 +69,6 @@
                     const part = parts[group_name][part_name]
 
                     const progress_bar_width = (part['default'] - part['min-value']) / (part['max-value'] - part['min-value']) * 100
-                    console.log(part_name, progress_bar_width)
 
                     group_parts.innerHTML += `
                         <tr id="${part_name}">
