@@ -7,7 +7,16 @@
 
         <h1 class="mb-4">F1 Setup Helper</h1>
 
-        <table class="table table-dark table-responsive table-aero mt-4 mb-4">
+        <div class="btn-group mt-4 mb-4" role="group" aria-label="part-sections">
+            <button class="btn btn-primary" type="button" onclick="showTableGroup('aero')">Aerodynamics</button>
+            <button class="btn btn-primary" type="button" onclick="showTableGroup('transmission')">Transmission</button>
+            <button class="btn btn-primary" type="button" onclick="showTableGroup('suspension-geo')">Suspension Geometry</button>
+            <button class="btn btn-primary" type="button" onclick="showTableGroup('suspension')">Suspension</button>
+            <button class="btn btn-primary" type="button" onclick="showTableGroup('brakes')">Brakes</button>
+            <button class="btn btn-primary" type="button" onclick="showTableGroup('tires')">Tires</button>
+        </div>
+
+        <table class="table table-dark table-responsive table-aero mt-4 mb-4" id="table-aero">
             <tbody>
             <tr class="front-wing">
                 <td class="part-name">Front Wing</td>
@@ -32,7 +41,7 @@
             </tbody>
         </table>
 
-        <table class="table table-dark table-responsive table-transmission mt-4 mb-4">
+        <table class="table table-dark table-responsive table-transmission mt-4 mb-4" id="table-transmission">
             <tbody>
             <tr class="on-throttle">
                 <td class="part-name">On Throttle</td>
@@ -58,7 +67,7 @@
 
         </table>
 
-        <table class="table table-dark table-responsive table-suspension-geo mt-4 mb-4">
+        <table class="table table-dark table-responsive table-suspension-geo mt-4 mb-4" id="table-suspension-geo">
             <tbody>
 
             <tr class="front-camber">
@@ -109,7 +118,7 @@
 
         </table>
 
-        <table class="table table-dark table-responsive table-suspension mt-4 mb-4">
+        <table class="table table-dark table-responsive table-suspension mt-4 mb-4" id="table-suspension">
             <tbody>
             <tr class="front-suspension">
                 <td class="part-name">Front Suspension</td>
@@ -176,7 +185,7 @@
             </tbody>
         </table>
 
-        <table class="table table-dark table-brakes mt-4 mb-4">
+        <table class="table table-dark table-brakes mt-4 mb-4" id="table-brakes">
             <tbody>
             <tr class="brake-pressure">
                 <td class="part-name">Brake Pressure</td>
@@ -201,7 +210,7 @@
             </tbody>
         </table>
 
-        <table class="table table-dark table-tires mt-4 mb-4">
+        <table class="table table-dark table-tires mt-4 mb-4" id="table-tires">
             <tbody>
             <tr class="front-right-tire">
                 <td class="part-name">Front Right Tire</td>
@@ -276,6 +285,17 @@
 {{define "js"}}
 
     <script>
+        activateNav('nav-f1setup')
+
+        let part_groups = [
+            'aero',
+            'transmission',
+            'suspension-geo',
+            'suspension',
+            'brakes',
+            'tires'
+        ]
+
         let default_setup = {
             "front-wing": 6,
             "rear-wing": 9,
@@ -298,6 +318,18 @@
             "rear-right-tire": 22.3,
             "rear-left-tire": 22.3
         }
+
+        function showTableGroup(table_name) {
+            for (const index in part_groups) {
+                const group_name = part_groups[index]
+                console.log(`table-${group_name}`)
+                const table_group = document.getElementById(`table-${group_name}`)
+                if (table_group.hasAttribute('hidden')) { continue }
+                table_group.setAttribute('hidden', '')
+            }
+            document.getElementById(`table-${table_name}`).removeAttribute('hidden')
+        }
+
     </script>
 
 {{end}}
