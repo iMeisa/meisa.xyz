@@ -14,6 +14,7 @@
             <button class="btn btn-primary" type="button" onclick="showTableGroup('suspension')">Suspension</button>
             <button class="btn btn-primary" type="button" onclick="showTableGroup('brakes')">Brakes</button>
             <button class="btn btn-primary" type="button" onclick="showTableGroup('tires')">Tires</button>
+            <button class="btn btn-success" type="button" onclick="showAllTables()">Show All</button>
         </div>
 
         <div id="parts-tables"></div>
@@ -135,6 +136,12 @@
                 table_group.setAttribute('hidden', '')
             }
             document.getElementById(`table-${table_name}`).removeAttribute('hidden')
+        }
+
+        function showAllTables() {
+            for (const group_name in parts) {
+                document.getElementById(`table-${group_name}`).removeAttribute('hidden')
+            }
         }
 
     </script>
