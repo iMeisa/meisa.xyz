@@ -80,7 +80,9 @@
                                     <div class="progress-bar increase-setup" style="width: 0"></div>
                                     <div class="progress-bar decrease-setup" style="width: 0"></div>
                                 </div>
-                                <span> ${part['default']} </span>
+                                <button class="btn btn-danger mt-2 me-4"><</button>
+                                <span class="${part_name}-value" style="padding-top: 5em">${part['default']}</span>
+                                <button class="btn btn-success mt-2 ms-4">></button>
                             </td>
                             <td class="part-desc">${part['min-name']} ${part['min-value']} - ${part['max-value']} ${part['max-name']}</td>
                         </tr>
