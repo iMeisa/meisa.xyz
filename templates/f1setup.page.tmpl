@@ -100,9 +100,19 @@
         function changePartValue(group_name, part_name, step) {
             const part = parts[group_name][part_name]
             let part_setup = document.getElementById(`${part_name}-value`)
+
+            if (part_name === 'brake-bias') { step = -step }
             const setup_value = parseFloat(part_setup.innerHTML)
-            if (part['min-value'] <= (setup_value + step) && (setup_value + step) <= part['max-value']) {
-                part_setup.innerHTML = `${((setup_value * 100) + (step * 100)) / 100}`
+            const new_setup = ((setup_value * 1000) + (step * 1000)) / 1000
+            console.log(new_setup)
+
+            if (part_name === 'brake-bias') {
+                if (new_setup < 71 && new_setup > 49) {
+                    part_setup.innerHTML = `${new_setup}`
+                }
+            }
+            else if (!(part['min-value'] - part['step'] === new_setup) && !(new_setup === part['max-value'] + part['step'])) {
+                part_setup.innerHTML = `${new_setup}`
             }
             updateProgressBars()
         }
