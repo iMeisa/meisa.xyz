@@ -8,6 +8,7 @@ import (
 	"github.com/iMeisa/meisa.xyz/internal/config"
 	"github.com/iMeisa/meisa.xyz/internal/models"
 	"github.com/iMeisa/meisa.xyz/internal/render"
+	"io/ioutil"
 	"net/http"
 )
 
@@ -70,7 +71,17 @@ func (m *Repository) PostCalculator(w http.ResponseWriter, r *http.Request) {
 }
 
 func (m *Repository) F1Setup(w http.ResponseWriter, r *http.Request) {
-	render.Template(w, r, "f1setup.page.tmpl", &models.TemplateData{})
+	stringMap := make(map[string]string)
+	partsList , err := ioutil.ReadFile("./static/json/f1setup/parts_list.json")
+	if err == nil {
+		stringMap["parts_list"] = string(partsList)
+	} else {
+		fmt.Println(err)
+	}
+
+	render.Template(w, r, "f1setup.page.tmpl", &models.TemplateData{
+		StringMap: stringMap,
+	})
 }
 
 func (m *Repository) Morse(w http.ResponseWriter, r *http.Request) {
