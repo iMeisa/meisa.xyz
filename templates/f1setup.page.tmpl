@@ -287,42 +287,183 @@
     <script>
         activateNav('nav-f1setup')
 
-        let part_groups = [
-            'aero',
-            'transmission',
-            'suspension-geo',
-            'suspension',
-            'brakes',
-            'tires'
-        ]
-
-        let default_setup = {
-            "front-wing": 6,
-            "rear-wing": 9,
-            "on-throttle": 70,
-            "off-throttle": 55,
-            "front-camber": -2.50,
-            "rear-camber": -2.00,
-            "front-toe": 0.06,
-            "rear-toe": 0.20,
-            "front-suspension": 2,
-            "rear-suspension": 5,
-            "front-roll": 2,
-            "rear-roll": 5,
-            "front-height": 2,
-            "rear-height": 6,
-            "brake-pressure": 92,
-            "brake-bias": 58,
-            "front-right-tire": 21.4,
-            "front-left-tire": 21.4,
-            "rear-right-tire": 22.3,
-            "rear-left-tire": 22.3
+        let parts = {
+            'aero': {
+                "front-wing": {
+                    "name": "Front Wing",
+                    "min-name": "Min",
+                    "max-name": "Max",
+                    "min-value": 1,
+                    "max-value": 11,
+                    "default": 6
+                },
+                "rear-wing": {
+                    "name": "Rear Wing",
+                    "min-name": "Min",
+                    "max-name": "Max",
+                    "min-value": 1,
+                    "max-value": 11,
+                    "default": 9
+                },
+            },
+            'transmission': {
+                "on-throttle": {
+                    "name": "Differential On Throttle",
+                    "min-name": "Unlocked",
+                    "max-name": "Locked",
+                    "min-value": 50,
+                    "max-value": 100,
+                    "default": 70
+                },
+                "off-throttle": {
+                    "name": "Differential Off Throttle",
+                    "min-name": "Unlocked",
+                    "max-name": "Locked",
+                    "min-value": 50,
+                    "max-value": 100,
+                    "default": 55
+                },
+            },
+            'suspension-geo': {
+                "front-camber": {
+                    "name": "Front Camber",
+                    "min-name": "Min",
+                    "max-name": "Max",
+                    "min-value": -3.50,
+                    "max-value": -2.50,
+                    "default": -2.50
+                },
+                "rear-camber": {
+                    "name": "Rear Camber",
+                    "min-name": "Min",
+                    "max-name": "Max",
+                    "min-value": -2.00,
+                    "max-value": -1.00,
+                    "default": -2.00
+                },
+                "front-toe": {
+                    "name": "Front Toe",
+                    "min-name": "Min",
+                    "max-name": "Max",
+                    "min-value": 0.05,
+                    "max-value": 0.15,
+                    "default": 0.06
+                },
+                "rear-toe": {
+                    "name": "Rear Toe",
+                    "min-name": "Min",
+                    "max-name": "Max",
+                    "min-value": 0.20,
+                    "max-value": 0.50,
+                    "default": 0.20
+                },
+            },
+            'suspension': {
+                "front-suspension": {
+                    "name": "Front Suspension",
+                    "min-name": "Soft",
+                    "max-name": "Firm",
+                    "min-value": 1,
+                    "max-value": 11,
+                    "default": 2
+                },
+                "rear-suspension": {
+                    "name": "Rear Suspension",
+                    "min-name": "Soft",
+                    "max-name": "Firm",
+                    "min-value": 1,
+                    "max-value": 11,
+                    "default": 5
+                },
+                "front-roll": {
+                    "name": "Front Anti-Roll Bar",
+                    "min-name": "Soft",
+                    "max-name": "Firm",
+                    "min-value": 1,
+                    "max-value": 11,
+                    "default": 2
+                },
+                "rear-roll": {
+                    "name": "Rear Anti-Roll Bar",
+                    "min-name": "Soft",
+                    "max-name": "Firm",
+                    "min-value": 1,
+                    "max-value": 11,
+                    "default": 5
+                },
+                "front-height": {
+                    "name": "Front Ride Height",
+                    "min-name": "Min",
+                    "max-name": "Max",
+                    "min-value": 1,
+                    "max-value": 11,
+                    "default": 2
+                },
+                "rear-height": {
+                    "name": "Rear Ride Height",
+                    "min-name": "Min",
+                    "max-name": "Max",
+                    "min-value": 1,
+                    "max-value": 11,
+                    "default": 6
+                },
+            },
+            'brakes': {
+                "brake-pressure": {
+                    "name": "Brake Pressure",
+                    "min-name": "Min",
+                    "max-name": "Max",
+                    "min-value": 50,
+                    "max-value": 100,
+                    "default": 92
+                },
+                "brake-bias": {
+                    "name": "Front Brake Bias",
+                    "min-name": "Front",
+                    "max-name": "Rear",
+                    "min-value": 70,
+                    "max-value": 50,
+                    "default": 58
+                },
+            },
+            'tires': {
+                "front-right-tire": {
+                    "name": "Front Right Tire",
+                    "min-name": "",
+                    "max-name": "PSI",
+                    "min-value": 21.0,
+                    "max-value": 25.0,
+                    "default": 21.4
+                },
+                "front-left-tire": {
+                    "name": "Front Left Tire",
+                    "min-name": "",
+                    "max-name": "PSI",
+                    "min-value": 21.0,
+                    "max-value": 25.0,
+                    "default": 21.4
+                },
+                "rear-right-tire": {
+                    "name": "Rear Right Tire",
+                    "min-name": "",
+                    "max-name": "PSI",
+                    "min-value": 19.5,
+                    "max-value": 23.5,
+                    "default": 22.3
+                },
+                "rear-left-tire": {
+                    "name": "Rear Left Tire",
+                    "min-name": "",
+                    "max-name": "PSI",
+                    "min-value": 19.5,
+                    "max-value": 23.5,
+                    "default": 22.3
+                },
+            }
         }
 
         function showTableGroup(table_name) {
-            for (const index in part_groups) {
-                const group_name = part_groups[index]
-                console.log(`table-${group_name}`)
+            for (const group_name in parts) {
                 const table_group = document.getElementById(`table-${group_name}`)
                 if (table_group.hasAttribute('hidden')) { continue }
                 table_group.setAttribute('hidden', '')
