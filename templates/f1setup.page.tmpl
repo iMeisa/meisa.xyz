@@ -24,6 +24,19 @@
             <div id="parts-tables"></div>
         </div>
     </div>
+
+    <hr>
+
+    <div class="container">
+
+        <div class="row">
+            <div class="btn-group" id="condition-1"></div>
+        </div>
+        <div class="row">
+            <div class="btn-group" id="condition-2"></div>
+        </div>
+
+    </div>
 {{end}}
 
 
@@ -69,8 +82,9 @@
 
         const is_mobile = window.matchMedia("only screen and (max-width: 768px)").matches
 
-        let parts = JSON.parse({{index .StringMap "parts_list"}})
-        let part_group_names = JSON.parse({{index .StringMap "part_group_names"}})
+        const parts = JSON.parse({{index .StringMap "parts_list"}})
+        const part_group_names = JSON.parse({{index .StringMap "part_group_names"}})
+        const setup_suggestions = JSON.parse({{index .StringMap "setup_suggestions"}})
 
         let setup = {}
 
@@ -81,7 +95,8 @@
         }
 
         buildButtons()
-        buildTables()
+        // buildTables()
+        firstConditionButtons()
 
 
         ////  Tables  ////
@@ -228,6 +243,32 @@
                 document.getElementById(`${part_name}-value`).innerHTML = setup[part_name]
             }
             updateProgressBars()
+        }
+
+        /***********
+        Suggestions
+         ***********/
+
+        /* Buttons */
+        function firstConditionButtons() {
+            let button_group = document.getElementById('condition-1')
+            for (const condition in setup_suggestions) {
+                button_group.innerHTML += `
+                    <button class="btn btn-outline-info" type="button">
+                    ${capitalizeAll(condition.replaceAll('_', ' '))}
+                    </button>
+                `
+            }
+        }
+
+        function capitalizeAll(sentence) {
+            const words = sentence.split(" ");
+
+            for (let i = 0; i < words.length; i++) {
+                words[i] = words[i][0].toUpperCase() + words[i].substr(1);
+            }
+
+            return words.join(" ")
         }
 
     </script>

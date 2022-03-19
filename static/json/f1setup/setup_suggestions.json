@@ -1,0 +1,31 @@
+{
+  "corner_entry": {
+    "understeer": [],
+    "oversteer": [],
+    "instability": []
+  },
+  "corner_exit": {
+    "understeer": [],
+    "oversteer": [],
+    "instability": []
+  },
+  "straights": {
+    "slow_acceleration": [],
+    "slow_top_speed": [],
+    "wheelspin_at_low_speed": [],
+    "sensitive_steering": []
+  },
+  "tires": {
+    "overheating": [],
+    "overcooling": []
+  },
+  "brakes": {
+    "locking": [],
+    "unstable": []
+  },
+  "other": {
+    "bottoming_out": [],
+    "high_fuel_consumption": [],
+    "high_tire_degradation": []
+  }
+}

@@ -86,6 +86,13 @@ func (m *Repository) F1Setup(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(err)
 	}
 
+	setupSuggestions, err := ioutil.ReadFile("./static/json/f1setup/setup_suggestions.json")
+	if err == nil {
+		stringMap["setup_suggestions"] = string(setupSuggestions)
+	} else {
+		fmt.Println(err)
+	}
+
 	render.Template(w, r, "f1setup.page.tmpl", &models.TemplateData{
 		StringMap: stringMap,
 	})
