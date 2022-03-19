@@ -7,16 +7,6 @@
 
         <h1 class="mb-4">F1 Setup Helper</h1>
 
-{{/*        <div class="btn-group btn-desktop" role="group" aria-label="part-sections">*/}}
-{{/*            <button class="btn btn-primary" type="button" onclick="showTableGroup('aero')">Aerodynamics</button>*/}}
-{{/*            <button class="btn btn-primary" type="button" onclick="showTableGroup('transmission')">Transmission</button>*/}}
-{{/*            <button class="btn btn-primary" type="button" onclick="showTableGroup('suspension-geo')">Suspension Geometry</button>*/}}
-{{/*            <button class="btn btn-primary" type="button" onclick="showTableGroup('suspension')">Suspension</button>*/}}
-{{/*            <button class="btn btn-primary" type="button" onclick="showTableGroup('brakes')">Brakes</button>*/}}
-{{/*            <button class="btn btn-primary" type="button" onclick="showTableGroup('tires')">Tires</button>*/}}
-{{/*            <button class="btn btn-success" type="button" onclick="showAllTables()">Show All</button>*/}}
-{{/*        </div>*/}}
-
         <div class="btn-group" id="part-sections"></div>
 
         <div id="parts-tables"></div>
@@ -28,7 +18,7 @@
     <style>
         /* Tables */
         .part-name {
-            width: 28%;
+            width: 25%;
             text-align: start;
         }
         .part-buttons {
@@ -36,6 +26,9 @@
         }
         .part-progress-bars {
             width: 25%
+        }
+        .part-setup-value {
+            width: 5%
         }
         .part-desc {
             width: 30%;
@@ -107,7 +100,7 @@
                                     <div class="progress-bar decrease-setup" id="${part_name}-bar-decrease" style="width: 0"></div>
                                 </div>
                             </td>
-                            <td class="align-middle">
+                            <td class="part-setup-value align-middle">
                                 <span id="${part_name}-value" style="width: 50em">${part['default']}</span>
                             </td>
                             <td class="part-desc align-middle">${part['min-name']} ${part['min-value']} - ${part['max-value']} ${part['max-name']}</td>
@@ -120,6 +113,10 @@
 
         function buildButtons() {
             let button_group = document.getElementById('part-sections')
+            if (is_mobile) {
+                button_group.classList.add('btn-group-vertical', 'btn-group-sm')
+            }
+
             for (const group_name in parts) {
                 button_group.innerHTML += `
                     <button class="btn btn-primary" type="button" onclick="showTableGroup('${group_name}')">
@@ -127,6 +124,9 @@
                     </button>
                 `
             }
+
+            button_group.innerHTML += `<button class="btn btn-success" type="button" onclick="showAllTables()">Show All</button>`
+            button_group.innerHTML += `<button class="btn btn-danger" type="button" onclick="showTableGroup('none')">Hide All</button>`
         }
 
         function changePartValue(group_name, part_name, step) {
