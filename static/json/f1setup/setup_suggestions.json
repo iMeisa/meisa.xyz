@@ -1,31 +1,122 @@
 {
   "corner_entry": {
-    "understeer": [],
-    "oversteer": [],
-    "instability": []
+    "understeer": {
+      "suspension": {},
+      "aero": {},
+      "tires": {},
+      "transmission": {},
+      "brakes": {},
+      "suspension-geo": {}
+    },
+    "oversteer": {
+      "suspension": {},
+      "aero": {},
+      "tires": {},
+      "transmission": {},
+      "brakes": {},
+      "suspension-geo": {}
+    },
+    "instability": {
+      "suspension": {},
+      "aero": {},
+      "tires": {},
+      "transmission": {},
+      "brakes": {},
+      "suspension-geo": {}
+    }
   },
   "corner_exit": {
-    "understeer": [],
-    "oversteer": [],
-    "instability": []
+    "understeer": {
+      "suspension": {},
+      "aero": {},
+      "tires": {},
+      "transmission": {},
+      "suspension-geo": {}
+    },
+    "oversteer": {
+      "suspension": {},
+      "aero": {},
+      "tires": {},
+      "transmission": {},
+      "suspension-geo": {}
+    },
+    "instability": {
+      "suspension": {},
+      "aero": {},
+      "tires": {},
+      "transmission": {},
+      "suspension-geo": {}
+    }
   },
   "straights": {
-    "slow_acceleration": [],
-    "slow_top_speed": [],
-    "wheelspin_at_low_speed": [],
-    "sensitive_steering": []
+    "slow_acceleration": {
+      "suspension": {},
+      "aero": {},
+      "tires": {},
+      "transmission": {},
+      "suspension-geo": {}
+    },
+    "slow_top_speed": {
+      "suspension": {},
+      "aero": {},
+      "tires": {},
+      "suspension-geo": {}
+    },
+    "wheelspin_at_low_speed": {
+      "suspension": {},
+      "tires": {},
+      "transmission": {},
+      "suspension-geo": {}
+    },
+    "sensitive_steering": {
+      "suspension-geo": {},
+      "tires": {}
+    }
   },
   "tires": {
-    "overheating": [],
-    "overcooling": []
+    "overheating": {
+      "tires": {},
+      "transmission": {},
+      "brakes": {},
+      "suspension-geo": {}
+    },
+    "overcooling": {
+      "tires": {},
+      "transmission": {},
+      "brakes": {},
+      "suspension-geo": {}
+    }
   },
   "brakes": {
-    "locking": [],
-    "unstable": []
+    "locking": {
+      "brakes": {},
+      "aero": {},
+      "tires": {}
+    },
+    "unstable": {
+      "aero": {},
+      "suspension": {},
+      "brakes": {},
+      "suspension-geo": {}
+    }
   },
   "other": {
-    "bottoming_out": [],
-    "high_fuel_consumption": [],
-    "high_tire_degradation": []
+    "bottoming_out": {
+      "aero": {},
+      "suspension": {},
+      "brakes": {}
+    },
+    "high_fuel_consumption": {
+      "aero": {},
+      "tires": {},
+      "suspension-geo": {}
+    },
+    "high_tire_degradation": {
+      "suspension": {},
+      "aero": {},
+      "tires": {},
+      "brakes": {},
+      "suspension-geo": {}
+    }
   }
 }
