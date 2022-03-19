@@ -26,10 +26,18 @@
     <style>
         /* Tables */
         .part-name {
-            width: 33%
+            width: 30%;
+            text-align: start;
+        }
+        .part-buttons {
+            width: 10%
+        }
+        .part-progress-bars {
+            width: 25%
         }
         .part-desc {
-            width: 33%
+            width: 30%;
+            text-align: end;
         }
 
 
@@ -79,18 +87,24 @@
 
                     group_parts.innerHTML += `
                         <tr id="${part_name}">
-                            <td class="part-name">${part['name']}</td>
-                            <td class="part-setup">
+                            <td class="part-name align-middle">${part['name']}</td>
+                            <td class="part-buttons align-middle">
+                                <button class="btn btn-outline-light btn-add"
+                                    onclick="changePartValue('${group_name}', '${part_name}', -${part['step']})"><</button>
+                                <button class="btn btn-outline-light btn-sub"
+                                    onclick="changePartValue('${group_name}', '${part_name}', ${part['step']})">></button>
+                            </td>
+                            <td class="part-progress-bars align-middle">
                                 <div class="progress">
                                     <div class="progress-bar" id="${part_name}-bar" style="width: 0"></div>
                                     <div class="progress-bar increase-setup" id="${part_name}-bar-increase" style="width: 0"></div>
                                     <div class="progress-bar decrease-setup" id="${part_name}-bar-decrease" style="width: 0"></div>
                                 </div>
-                                <button class="btn btn-danger mt-2 me-3" onclick="changePartValue('${group_name}', '${part_name}', -${part['step']})"><</button>
-                                <span id="${part_name}-value" style="padding-top: 5em">${part['default']}</span>
-                                <button class="btn btn-success mt-2 ms-3" onclick="changePartValue('${group_name}', '${part_name}', ${part['step']})">></button>
                             </td>
-                            <td class="part-desc">${part['min-name']} ${part['min-value']} - ${part['max-value']} ${part['max-name']}</td>
+                            <td class="align-middle">
+                                <span id="${part_name}-value" style="width: 50em">${part['default']}</span>
+                            </td>
+                            <td class="part-desc align-middle">${part['min-name']} ${part['min-value']} - ${part['max-value']} ${part['max-name']}</td>
                         </tr>
                     `
                 }
@@ -105,7 +119,6 @@
             if (part_name === 'brake-bias') { step = -step }
             const setup_value = parseFloat(part_setup.innerHTML)
             const new_setup = ((setup_value * 1000) + (step * 1000)) / 1000
-            console.log(new_setup)
 
             if (part_name === 'brake-bias') {
                 if (new_setup < 71 && new_setup > 49) {
