@@ -79,6 +79,13 @@ func (m *Repository) F1Setup(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(err)
 	}
 
+	partGroupNames, err := ioutil.ReadFile("./static/json/f1setup/part_group_names.json")
+	if err == nil {
+		stringMap["part_group_names"] = string(partGroupNames)
+	} else {
+		fmt.Println(err)
+	}
+
 	render.Template(w, r, "f1setup.page.tmpl", &models.TemplateData{
 		StringMap: stringMap,
 	})

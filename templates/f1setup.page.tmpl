@@ -7,15 +7,17 @@
 
         <h1 class="mb-4">F1 Setup Helper</h1>
 
-        <div class="btn-group mt-4 mb-4" role="group" aria-label="part-sections">
-            <button class="btn btn-primary" type="button" onclick="showTableGroup('aero')">Aerodynamics</button>
-            <button class="btn btn-primary" type="button" onclick="showTableGroup('transmission')">Transmission</button>
-            <button class="btn btn-primary" type="button" onclick="showTableGroup('suspension-geo')">Suspension Geometry</button>
-            <button class="btn btn-primary" type="button" onclick="showTableGroup('suspension')">Suspension</button>
-            <button class="btn btn-primary" type="button" onclick="showTableGroup('brakes')">Brakes</button>
-            <button class="btn btn-primary" type="button" onclick="showTableGroup('tires')">Tires</button>
-            <button class="btn btn-success" type="button" onclick="showAllTables()">Show All</button>
-        </div>
+{{/*        <div class="btn-group btn-desktop" role="group" aria-label="part-sections">*/}}
+{{/*            <button class="btn btn-primary" type="button" onclick="showTableGroup('aero')">Aerodynamics</button>*/}}
+{{/*            <button class="btn btn-primary" type="button" onclick="showTableGroup('transmission')">Transmission</button>*/}}
+{{/*            <button class="btn btn-primary" type="button" onclick="showTableGroup('suspension-geo')">Suspension Geometry</button>*/}}
+{{/*            <button class="btn btn-primary" type="button" onclick="showTableGroup('suspension')">Suspension</button>*/}}
+{{/*            <button class="btn btn-primary" type="button" onclick="showTableGroup('brakes')">Brakes</button>*/}}
+{{/*            <button class="btn btn-primary" type="button" onclick="showTableGroup('tires')">Tires</button>*/}}
+{{/*            <button class="btn btn-success" type="button" onclick="showAllTables()">Show All</button>*/}}
+{{/*        </div>*/}}
+
+        <div class="btn-group" id="part-sections"></div>
 
         <div id="parts-tables"></div>
     </div>
@@ -26,11 +28,11 @@
     <style>
         /* Tables */
         .part-name {
-            width: 30%;
+            width: 28%;
             text-align: start;
         }
         .part-buttons {
-            width: 10%
+            width: 15%
         }
         .part-progress-bars {
             width: 25%
@@ -59,7 +61,10 @@
     <script>
         activateNav('nav-f1setup')
 
+        const is_mobile = window.matchMedia("only screen and (max-width: 768px)").matches
+
         let parts = JSON.parse({{index .StringMap "parts_list"}})
+        let part_group_names = JSON.parse({{index .StringMap "part_group_names"}})
 
         let setup = {}
 
@@ -69,6 +74,7 @@
             }
         }
 
+        buildButtons()
         buildTables()
 
         function buildTables(){
@@ -110,6 +116,17 @@
                 }
             }
             updateProgressBars()
+        }
+
+        function buildButtons() {
+            let button_group = document.getElementById('part-sections')
+            for (const group_name in parts) {
+                button_group.innerHTML += `
+                    <button class="btn btn-primary" type="button" onclick="showTableGroup('${group_name}')">
+                        ${part_group_names[group_name]}
+                    </button>
+                `
+            }
         }
 
         function changePartValue(group_name, part_name, step) {
