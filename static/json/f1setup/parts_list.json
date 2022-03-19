@@ -149,7 +149,7 @@
       "max-name": "Rear",
       "min-value": 70,
       "max-value": 50,
-      "default": 52,
+      "default": 56,
       "step": 1
     }
   },

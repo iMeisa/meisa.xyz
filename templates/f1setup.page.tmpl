@@ -5,11 +5,25 @@
 {{define "content"}}
     <div class="container">
 
-        <h1 class="mb-4">F1 Setup Helper</h1>
+        <div class="row">
+            <h1 class="mb-4">F1 Setup Helper</h1>
+        </div>
 
-        <div class="btn-group" id="part-sections"></div>
 
-        <div id="parts-tables"></div>
+        <div class="row">
+            <div class="btn-group mb-2" id="part-sections"></div>
+        </div>
+
+        <div class="row">
+            <div class="btn-group" id="setup-buttons">
+                <button class="btn btn-success" id="apply-button" onclick="applySetting()">Apply</button>
+                <button class="btn btn-danger" id="revert-button" onclick="revertSetting()">Revert</button>
+            </div>
+        </div>
+
+        <div class="row">
+            <div id="parts-tables"></div>
+        </div>
     </div>
 {{end}}
 
@@ -70,6 +84,8 @@
         buildButtons()
         buildTables()
 
+
+        ////  Tables  ////
         function buildTables(){
             let parts_tables = document.getElementById('parts-tables')
             for (const group_name in parts) {
@@ -111,24 +127,6 @@
             updateProgressBars()
         }
 
-        function buildButtons() {
-            let button_group = document.getElementById('part-sections')
-            if (is_mobile) {
-                button_group.classList.add('btn-group-vertical', 'btn-group-sm')
-            }
-
-            for (const group_name in parts) {
-                button_group.innerHTML += `
-                    <button class="btn btn-primary" type="button" onclick="showTableGroup('${group_name}')">
-                        ${part_group_names[group_name]}
-                    </button>
-                `
-            }
-
-            button_group.innerHTML += `<button class="btn btn-success" type="button" onclick="showAllTables()">Show All</button>`
-            button_group.innerHTML += `<button class="btn btn-danger" type="button" onclick="showTableGroup('none')">Hide All</button>`
-        }
-
         function changePartValue(group_name, part_name, step) {
             const part = parts[group_name][part_name]
             let part_setup = document.getElementById(`${part_name}-value`)
@@ -148,16 +146,22 @@
             updateProgressBars()
         }
 
-        function updateProgressBars() {
-            // for (const group_name in parts) {
-            //     for (const part_name in parts[group_name]) {
-            //         let part_bar = document.getElementById(`${part_name}-bar`)
-            //         const part_setup = Number(document.getElementById(`${part_name}-value`).innerHTML)
-            //         const part = parts[group_name][part_name]
-            //         part_bar.style.width = `${(part_setup - part['min-value']) / (part['max-value'] - part['min-value']) * 100}%`
-            //     }
-            // }
+        function showTableGroup(table_name) {
+            for (const group_name in parts) {
+                const table_group = document.getElementById(`table-${group_name}`)
+                if (table_group.hasAttribute('hidden')) { continue }
+                table_group.setAttribute('hidden', '')
+            }
+            document.getElementById(`table-${table_name}`).removeAttribute('hidden')
+        }
 
+        function showAllTables() {
+            for (const group_name in parts) {
+                document.getElementById(`table-${group_name}`).removeAttribute('hidden')
+            }
+        }
+
+        function updateProgressBars() {
             for (const group_name in parts) {
                 for (const part_name in parts[group_name]) {
                     const part = parts[group_name][part_name]
@@ -188,19 +192,39 @@
             return (current_value - min_value) / (max_value - min_value) * 100
         }
 
-        function showTableGroup(table_name) {
-            for (const group_name in parts) {
-                const table_group = document.getElementById(`table-${group_name}`)
-                if (table_group.hasAttribute('hidden')) { continue }
-                table_group.setAttribute('hidden', '')
+        //// Buttons ////
+        function buildButtons() {
+            let button_group = document.getElementById('part-sections')
+            if (is_mobile) {
+                button_group.classList.add('btn-group-vertical', 'btn-group-sm')
             }
-            document.getElementById(`table-${table_name}`).removeAttribute('hidden')
+
+            for (const group_name in parts) {
+                button_group.innerHTML += `
+                    <button class="btn btn-primary" type="button" onclick="showTableGroup('${group_name}')">
+                        ${part_group_names[group_name]}
+                    </button>
+                `
+            }
+
+            button_group.innerHTML += `<button class="btn btn-success" type="button" onclick="showAllTables()">Show All</button>`
+            button_group.innerHTML += `<button class="btn btn-danger" type="button" onclick="showTableGroup('none')">Hide All</button>`
         }
 
-        function showAllTables() {
+        function applySetting() {
             for (const group_name in parts) {
-                document.getElementById(`table-${group_name}`).removeAttribute('hidden')
+                for (const part_name in parts[group_name]) {
+                    setup[part_name] = Number(document.getElementById(`${part_name}-value`).innerHTML)
+                }
             }
+            updateProgressBars()
+        }
+
+        function revertSetting() {
+            for (const part_name in setup) {
+                document.getElementById(`${part_name}-value`).innerHTML = setup[part_name]
+            }
+            updateProgressBars()
         }
 
     </script>
