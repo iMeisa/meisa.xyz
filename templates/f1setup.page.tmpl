@@ -152,9 +152,8 @@
             const part = parts[group_name][part_name]
             let part_setup = document.getElementById(`${part_name}-value`)
 
-            if (part_name === 'brake-bias') { step = -step }
             const setup_value = parseFloat(part_setup.innerHTML)
-            const new_setup = ((setup_value * 1000) + (step * 1000)) / 1000
+            const new_setup = calculateAdjustment(part_name, setup_value, step)
 
             if (part_name === 'brake-bias') {
                 if (new_setup < 71 && new_setup > 49) {
@@ -215,6 +214,11 @@
 
         function calculateWidth(current_value, min_value, max_value) {
             return (current_value - min_value) / (max_value - min_value) * 100
+        }
+
+        function calculateAdjustment(part_name, setup_value, step) {
+            if (part_name === 'brake-bias') { step = -step }
+            return (((setup_value * 1000) + (step * 1000)) / 1000)
         }
 
         //// Buttons ////
@@ -298,14 +302,17 @@
                 `
 
                 let group_suggestions = document.getElementById(`${group_name}-suggestions`)
-                for (const part_name in selected_suggestions[group_name]) {
-                    if (group_name === 'tires') {continue}
+                const suggestion_group = selected_suggestions[group_name]
+                for (const part_name in suggestion_group) {
+                    if (group_name === 'tires') {continue}  // Temporary until solution found
+
                     const current_part_value = Number(document.getElementById(`${part_name}-value`).innerHTML)
-                    const part_suggestion = selected_suggestions[group_name][part_name]
+                    const part = parts[group_name][part_name]
+                    const part_suggestion = calculateAdjustment(part_name, current_part_value, (suggestion_group[part_name]['change'] * part['step']))
                     group_suggestions.innerHTML += `
                         <tr>
                             <td class="suggestion-part-name">${part_name}</td>
-                            <td class="suggested-${part_name}-value">${current_part_value} -> ${current_part_value + part_suggestion['change']}</td>
+                            <td class="suggested-${part_name}-value">${current_part_value} -> ${part_suggestion}</td>
                         </tr>
                     `
                 }
