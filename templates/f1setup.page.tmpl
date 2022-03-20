@@ -53,10 +53,20 @@
             width: 30%;
             text-align: start;
         }
+        .suggestion-part-name {
+            width: 40%;
+            text-align: start;
+        }
         .part-buttons {
             width: 10%
         }
+        .suggestion-apply-button {
+            width: 20%
+        }
         .part-progress-bars {
+            width: 25%
+        }
+        .suggestion-progress-bars {
             width: 25%
         }
         .part-setup-value {
@@ -181,33 +191,44 @@
             }
         }
 
+        function updateProgressBar(group_name, part_name, new_value, is_suggestion) {
+            const part = parts[group_name][part_name]
+            const before_value = setup[part_name]
+
+            let total_width = calculateWidth(Math.max(new_value, before_value), part['min-value'], part['max-value'])
+            let min_width = calculateWidth(Math.min(before_value, new_value), part['min-value'], part['max-value'])
+            if (part_name === 'brake-bias') {
+                total_width = calculateWidth(Math.min(new_value, before_value), part['min-value'], part['max-value'])
+                min_width = calculateWidth(Math.max(before_value, new_value), part['min-value'], part['max-value'])
+            }
+            const before_width = calculateWidth(before_value, part['min-value'], part['max-value'])
+            const diff_width = total_width - min_width
+
+            let part_bar = document.getElementById(`${part_name}-bar`)
+            let decrease_bar = document.getElementById(`${part_name}-bar-decrease`)
+            let increase_bar = document.getElementById(`${part_name}-bar-increase`)
+            if (is_suggestion) {
+                part_bar = document.getElementById(`${part_name}-suggestion-bar`)
+                decrease_bar = document.getElementById(`${part_name}-suggestion-bar-decrease`)
+                increase_bar = document.getElementById(`${part_name}-suggestion-bar-increase`)
+            }
+
+            part_bar.style.width = `${min_width}%`
+
+            if (min_width < before_width) { decrease_bar.style.width = `${diff_width}%` }
+            else if (total_width > before_width) { increase_bar.style.width = `${diff_width}%` }
+            else {
+                decrease_bar.style.width = '0'
+                increase_bar.style.width = '0'
+            }
+
+        }
+
         function updateProgressBars() {
             for (const group_name in parts) {
                 for (const part_name in parts[group_name]) {
-                    const part = parts[group_name][part_name]
-                    const before_value = setup[part_name]
                     const new_value = Number(document.getElementById(`${part_name}-value`).innerHTML)
-
-                    let total_width = calculateWidth(Math.max(new_value, before_value), part['min-value'], part['max-value'])
-                    let min_width = calculateWidth(Math.min(before_value, new_value), part['min-value'], part['max-value'])
-                    if (part_name === 'brake-bias') {
-                        total_width = calculateWidth(Math.min(new_value, before_value), part['min-value'], part['max-value'])
-                        min_width = calculateWidth(Math.max(before_value, new_value), part['min-value'], part['max-value'])
-                    }
-                    const before_width = calculateWidth(before_value, part['min-value'], part['max-value'])
-                    const diff_width = total_width - min_width
-
-                    let part_bar = document.getElementById(`${part_name}-bar`)
-                    const decrease_bar = document.getElementById(`${part_name}-bar-decrease`)
-                    const increase_bar = document.getElementById(`${part_name}-bar-increase`)
-                    part_bar.style.width = `${min_width}%`
-
-                    if (min_width < before_width) { decrease_bar.style.width = `${diff_width}%` }
-                    else if (total_width > before_width) { increase_bar.style.width = `${diff_width}%` }
-                    else {
-                        decrease_bar.style.width = '0'
-                        increase_bar.style.width = '0'
-                    }
+                    updateProgressBar(group_name, part_name, new_value, false)
                 }
             }
         }
@@ -311,12 +332,33 @@
                     const part_suggestion = calculateAdjustment(part_name, current_part_value, (suggestion_group[part_name]['change'] * part['step']))
                     group_suggestions.innerHTML += `
                         <tr>
-                            <td class="suggestion-part-name">${part_name}</td>
-                            <td class="suggested-${part_name}-value">${current_part_value} -> ${part_suggestion}</td>
+                            <td class="suggestion-part-name align-middle">${part['name']}</td>
+                            <td class="suggestion-progress-bars align-middle">
+                                <div class="progress">
+                                    <div class="progress-bar" id="${part_name}-suggestion-bar" style="width: 0"></div>
+                                    <div class="progress-bar increase-setup" id="${part_name}-suggestion-bar-increase" style="width: 0"></div>
+                                    <div class="progress-bar decrease-setup" id="${part_name}-suggestion-bar-decrease" style="width: 0"></div>
+                                </div>
+                            </td>
+                            <td class="suggested-${part_name}-value align-middle">${current_part_value} -> ${part_suggestion}</td>
+                            <td class="suggestion-apply-button align-middle">
+                                <button class="btn btn-success" id="${part_name}-apply" onclick="applySuggestion('${group_name}',  '${part_name}', ${part_suggestion})">
+                                    Apply
+                                </button>
+
+                            </td>
                         </tr>
                     `
+                    updateProgressBar(group_name, part_name, part_suggestion, true)
                 }
             }
+        }
+
+        function applySuggestion(group_name, part_name, new_value) {
+            showTableGroup(group_name)
+            document.getElementById(`${part_name}-value`).innerHTML = new_value
+            document.getElementById(`${part_name}-apply`).setAttribute('disabled', '')
+            updateProgressBars()
         }
 
         function capitalizeAll(sentence) {
