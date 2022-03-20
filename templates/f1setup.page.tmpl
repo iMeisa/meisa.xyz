@@ -293,8 +293,22 @@
                                 <th scope="col">${part_group_names[group_name]}</th>
                             </tr>
                         </thead>
+                        <tbody id="${group_name}-suggestions"></tbody>
                     </table>
                 `
+
+                let group_suggestions = document.getElementById(`${group_name}-suggestions`)
+                for (const part_name in selected_suggestions[group_name]) {
+                    if (group_name === 'tires') {continue}
+                    const current_part_value = Number(document.getElementById(`${part_name}-value`).innerHTML)
+                    const part_suggestion = selected_suggestions[group_name][part_name]
+                    group_suggestions.innerHTML += `
+                        <tr>
+                            <td class="suggestion-part-name">${part_name}</td>
+                            <td class="suggested-${part_name}-value">${current_part_value} -> ${current_part_value + part_suggestion['change']}</td>
+                        </tr>
+                    `
+                }
             }
         }
 
