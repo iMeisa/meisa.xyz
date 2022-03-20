@@ -1,122 +1,593 @@
 {
   "corner_entry": {
     "understeer": {
-      "suspension": {},
-      "aero": {},
-      "tires": {},
-      "transmission": {},
-      "brakes": {},
-      "suspension-geo": {}
+      "suspension": {
+        "front-suspension": {
+          "change": -1,
+          "or": "rear-suspension",
+          "change2": 1
+        },
+        "front-roll": {
+          "change": -1,
+          "or": "rear-roll",
+          "change2": 1
+        },
+        "front-height": {
+          "change": -1,
+          "or": "rear-height",
+          "change2": 1
+        }
+      },
+      "aero": {
+        "front-wing": {
+          "change": 1
+        }
+      },
+      "tires": {
+        "front-tires": {
+          "change": -1
+        }
+      },
+      "transmission": {
+        "off-throttle": {
+          "change": 1
+        }
+      },
+      "brakes": {
+        "brake-bias": {
+          "change": 1
+        }
+      },
+      "suspension-geo": {
+        "front-camber": {
+          "change": -1
+        },
+        "front-toe": {
+          "change": -1
+        },
+        "rear-toe": {
+          "change": -1
+        }
+      }
     },
     "oversteer": {
-      "suspension": {},
-      "aero": {},
-      "tires": {},
-      "transmission": {},
-      "brakes": {},
-      "suspension-geo": {}
+      "suspension": {
+        "rear-suspension": {
+          "change": -1,
+          "or": "front-suspension",
+          "change2": 1
+        },
+        "rear-roll": {
+          "change": -1,
+          "or": "front-roll",
+          "change2": 1
+        },
+        "rear-height": {
+          "change": -1,
+          "or": "front-height",
+          "change2": 1
+        }
+      },
+      "aero": {
+        "rear-wing": {
+          "change": 1
+        }
+      },
+      "tires": {
+        "rear-tires": {
+          "change": -1
+        }
+      },
+      "transmission": {
+        "off-throttle": {
+          "change": -1
+        }
+      },
+      "brakes": {
+        "brake-bias": {
+          "change": -1
+        }
+      },
+      "suspension-geo": {
+        "rear-camber": {
+          "change": -1
+        },
+        "rear-toe": {
+          "change": 1
+        },
+        "front-toe": {
+          "change": 1
+        }
+      }
     },
     "instability": {
-      "suspension": {},
-      "aero": {},
-      "tires": {},
-      "transmission": {},
-      "brakes": {},
-      "suspension-geo": {}
+      "suspension": {
+        "front-suspension": {
+          "change": -1,
+          "and": "rear-suspension",
+          "change2": -1
+        },
+        "front-roll": {
+          "change": -1,
+          "and": "rear-roll",
+          "change2": -1
+        },
+        "front-height": {
+          "change": 1,
+          "and": "rear-height",
+          "change2": 1
+        }
+      },
+      "aero": {
+        "rear-wing": {
+          "change": 1
+        }
+      },
+      "tires": {
+        "front-tires": {
+          "change": -1,
+          "and": "rear-tires",
+          "change2": -1
+        }
+      },
+      "transmission": {
+        "off-throttle": {
+          "change": -1
+        }
+      },
+      "brakes": {
+        "brake-bias": {
+          "change": -1
+        }
+      },
+      "suspension-geo": {
+        "front-camber": {
+          "change": 1,
+          "and": "rear-camber",
+          "change2": 1
+        },
+        "front-toe": {
+          "change": 1,
+          "and": "rear-toe",
+          "change2": 1
+        }
+      }
     }
   },
   "corner_exit": {
     "understeer": {
-      "suspension": {},
-      "aero": {},
-      "tires": {},
-      "transmission": {},
-      "suspension-geo": {}
+      "suspension": {
+        "front-suspension": {
+          "change": -1,
+          "or": "rear-suspension",
+          "change2": 1
+        },
+        "front-roll": {
+          "change": -1,
+          "or": "rear-roll",
+          "change2": 1
+        },
+        "front-height": {
+          "change": -1,
+          "or": "rear-height",
+          "change2": 1
+        }
+      },
+      "aero": {
+        "front-wing": {
+          "change": 1
+        }
+      },
+      "tires": {
+        "front-tires": {
+          "change": -1
+        }
+      },
+      "transmission": {
+        "on-throttle": {
+          "change": 1
+        }
+      },
+      "suspension-geo": {
+        "front-camber": {
+          "change": -1
+        },
+        "front-toe": {
+          "change": -1
+        },
+        "rear-toe": {
+          "change": -1
+        }
+      }
     },
     "oversteer": {
-      "suspension": {},
-      "aero": {},
-      "tires": {},
-      "transmission": {},
-      "suspension-geo": {}
+      "suspension": {
+        "rear-suspension": {
+          "change": -1,
+          "or": "front-suspension",
+          "change2": 1
+        },
+        "rear-roll": {
+          "change": -1,
+          "or": "front-roll",
+          "change2": 1
+        },
+        "rear-height": {
+          "change": -1,
+          "or": "front-height",
+          "change2": 1
+        }
+      },
+      "aero": {
+        "rear-wing": {
+          "change": 1
+        }
+      },
+      "tires": {
+        "rear-tires": {
+          "change": -1
+        }
+      },
+      "transmission": {
+        "on-throttle": {
+          "change": -1
+        }
+      },
+      "suspension-geo": {
+        "rear-camber": {
+          "change": -1
+        },
+        "rear-toe": {
+          "change": 1
+        }
+      }
     },
     "instability": {
-      "suspension": {},
-      "aero": {},
-      "tires": {},
-      "transmission": {},
-      "suspension-geo": {}
+      "suspension": {
+        "front-suspension": {
+          "change": -1,
+          "and": "rear-suspension",
+          "change2": -1
+        },
+        "front-roll": {
+          "change": -1,
+          "and": "rear-roll",
+          "change2": -1
+        },
+        "front-height": {
+          "change": 1,
+          "and": "rear-height",
+          "change2": 1
+        }
+      },
+      "aero": {
+        "rear-wing": {
+          "change": 1
+        }
+      },
+      "tires": {
+        "front-tires": {
+          "change": -1,
+          "and": "rear-tires",
+          "change2": -1
+        }
+      },
+      "transmission": {
+        "on-throttle": {
+          "change": -1
+        }
+      },
+      "suspension-geo": {
+        "rear-camber": {
+          "change": 1
+        },
+        "rear-toe": {
+          "change": 1
+        }
+      }
     }
   },
   "straights": {
     "slow_acceleration": {
-      "suspension": {},
-      "aero": {},
-      "tires": {},
-      "transmission": {},
-      "suspension-geo": {}
+      "suspension": {
+        "front-height": {
+          "change": -1,
+          "and": "rear-height",
+          "change2": -1
+        }
+      },
+      "aero": {
+        "front-wing": {
+          "change": -1,
+          "and": "rear-wing",
+          "change2": -1
+        }
+      },
+      "tires": {
+        "front-tires": {
+          "change": 1,
+          "and": "rear-tires",
+          "change2": 1
+        }
+      },
+      "transmission": {
+        "on-throttle": {
+          "change": 1
+        }
+      },
+      "suspension-geo": {
+        "front-toe": {
+          "change": -1,
+          "and": "rear-toe",
+          "change2": -1
+        }
+      }
     },
     "slow_top_speed": {
-      "suspension": {},
-      "aero": {},
-      "tires": {},
-      "suspension-geo": {}
+      "suspension": {
+        "front-height": {
+          "change": -1,
+          "and": "rear-height",
+          "change2": -1
+        }
+      },
+      "aero": {
+        "front-wing": {
+          "change": -1,
+          "and": "rear-wing",
+          "change2": -1
+        }
+      },
+      "tires": {
+        "front-tires": {
+          "change": 1,
+          "and": "rear-tires",
+          "change2": 1
+        }
+      },
+      "suspension-geo": {
+        "front-toe": {
+          "change": -1,
+          "and": "rear-toe",
+          "change2": -1
+        }
+      }
     },
     "wheelspin_at_low_speed": {
-      "suspension": {},
-      "tires": {},
-      "transmission": {},
-      "suspension-geo": {}
+      "suspension": {
+        "rear-suspension": {
+          "change": -1
+        },
+        "rear-roll": {
+          "change": -1
+        },
+        "rear-height": {
+          "change": -1,
+          "or": "front-height",
+          "change2": 1
+        }
+      },
+      "tires": {
+        "rear-tires": {
+          "change": -1
+        }
+      },
+      "transmission": {
+        "on-throttle": {
+          "change": 1
+        }
+      },
+      "suspension-geo": {
+        "rear-camber": {
+          "change": 1
+        }
+      }
     },
     "sensitive_steering": {
-      "suspension-geo": {},
-      "tires": {}
+      "suspension-geo": {
+        "front-camber": {
+          "change": 1
+        },
+        "front-toe": {
+          "change": 1,
+          "and": "rear-toe",
+          "change2": 1
+        }
+      },
+      "tires": {
+        "front-tires": {
+          "change": -1,
+          "and": "rear-tires",
+          "change2": -1
+        }
+      }
     }
   },
   "tires": {
     "overheating": {
-      "tires": {},
-      "transmission": {},
-      "brakes": {},
-      "suspension-geo": {}
+      "tires": {
+        "front-tires": {
+          "change": -1,
+          "and": "rear-tires",
+          "change2": -1
+        }
+      },
+      "transmission": {
+        "on-throttle": {
+          "change": -1,
+          "and": "off-throttle",
+          "change2": -1
+        }
+      },
+      "brakes": {
+        "brake-pressure": {
+          "change": -1
+        },
+        "brake-bias": {
+          "change": 1
+        }
+      },
+      "suspension-geo": {
+        "rear-camber": {
+          "change": 1
+        },
+        "rear-toe": {
+          "change": -1
+        }
+      }
     },
     "overcooling": {
-      "tires": {},
-      "transmission": {},
-      "brakes": {},
-      "suspension-geo": {}
+      "tires": {
+        "front-tires": {
+          "change": 1,
+          "and": "rear-tires",
+          "change2": 1
+        }
+      },
+      "transmission": {
+        "on-throttle": {
+          "change": 1,
+          "and": "off-throttle",
+          "change2": 1
+        }
+      },
+      "brakes": {
+        "brake-pressure": {
+          "change": 1
+        }
+      }
     }
   },
   "brakes": {
     "locking": {
-      "brakes": {},
-      "aero": {},
-      "tires": {}
+      "brakes": {
+        "brake-pressure": {
+          "change": -1
+        },
+        "brake-bias": {
+          "change": 1
+        }
+      },
+      "aero": {
+        "front-wing": {
+          "change": 1,
+          "and": "rear-wing",
+          "change2": 1
+        }
+      },
+      "tires": {
+        "front-tires": {
+          "change": -1,
+          "and": "rear-tires",
+          "change2": -1
+        }
+      }
     },
     "unstable": {
-      "aero": {},
-      "suspension": {},
-      "brakes": {},
-      "suspension-geo": {}
+      "aero": {
+        "front-wing": {
+          "change": 1,
+          "and": "rear-wing",
+          "change2": 1
+        }
+      },
+      "suspension": {
+        "rear-height": {
+          "change": -1,
+          "or": "front-height",
+          "change2": 1
+        }
+      },
+      "brakes": {
+        "brake-pressure": {
+          "change": -1
+        },
+        "brake-bias": {
+          "change": -1
+        }
+      },
+      "suspension-geo": {
+        "front-toe": {
+          "change": 1,
+          "and": "rear-toe",
+          "change2": 1
+        },
+        "front-camber": {
+          "change": 1,
+          "and": "rear-camber",
+          "change2": 1
+        }
+      }
     }
   },
   "other": {
     "bottoming_out": {
-      "aero": {},
-      "suspension": {},
-      "brakes": {}
+      "aero": {
+        "front-wing": {
+          "change": -1,
+          "and": "rear-wing",
+          "change2": -1
+        }
+      },
+      "suspension": {
+        "front-height": {
+          "change": 1,
+          "and": "rear-height",
+          "change2": 1
+        }
+      },
+      "brakes": {
+        "brake-pressure": {
+          "change": -1
+        },
+        "brake-bias": {
+          "change": -1
+        }
+      }
     },
     "high_fuel_consumption": {
-      "aero": {},
-      "tires": {},
-      "suspension-geo": {}
+      "aero": {
+        "front-wing": {
+          "change": -1,
+          "and": "rear-wing",
+          "change2": -1
+        }
+      },
+      "tires": {
+        "front-tires": {
+          "change": 1,
+          "and": "rear-tires",
+          "change2": 1
+        }
+      }
     },
     "high_tire_degradation": {
-      "suspension": {},
-      "aero": {},
-      "tires": {},
-      "brakes": {},
-      "suspension-geo": {}
+      "suspension": {
+        "front-height": {
+          "change": 1,
+          "and": "rear-height",
+          "change2": 1
+        }
+      },
+      "aero": {
+        "front-wing": {
+          "change": -1,
+          "and": "rear-wing",
+          "change2": -1
+        }
+      },
+      "tires": {
+        "front-tires": {
+          "change": 1,
+          "and": "rear-tires",
+          "change2": 1
+        }
+      },
+      "brakes": {
+        "brake-bias": {
+          "change": 1
+        }
+      }
     }
   }
 }
