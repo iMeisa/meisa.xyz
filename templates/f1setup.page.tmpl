@@ -15,8 +15,8 @@
 
         <div class="row">
             <div class="btn-group" id="setup-buttons">
-                <button class="btn btn-success" id="apply-button" onclick="applySetting()">Apply</button>
-                <button class="btn btn-danger" id="revert-button" onclick="revertSetting()">Revert</button>
+                <button class="btn btn-success" id="apply-button" onclick="applySetting(); hideApply()" hidden>Apply</button>
+                <button class="btn btn-danger" id="revert-button" onclick="revertSetting(); hideApply()" hidden>Revert</button>
             </div>
         </div>
 
@@ -136,9 +136,9 @@
                             <td class="part-name align-middle">${part['name']}</td>
                             <td class="part-buttons align-middle">
                                 <button class="btn btn-outline-light btn-add"
-                                    onclick="changePartValue('${group_name}', '${part_name}', -${part['step']})"><</button>
+                                    onclick="changePartValue('${group_name}', '${part_name}', -${part['step']}); showApply()"><</button>
                                 <button class="btn btn-outline-light btn-sub"
-                                    onclick="changePartValue('${group_name}', '${part_name}', ${part['step']})">></button>
+                                    onclick="changePartValue('${group_name}', '${part_name}', ${part['step']}); showApply()">></button>
                             </td>
                             <td class="part-progress-bars align-middle">
                                 <div class="progress">
@@ -277,6 +277,16 @@
             updateProgressBars()
         }
 
+        function showApply() {
+            document.getElementById(`apply-button`).removeAttribute('hidden')
+            document.getElementById('revert-button').removeAttribute('hidden')
+        }
+
+        function hideApply() {
+            document.getElementById(`apply-button`).setAttribute('hidden', '')
+            document.getElementById('revert-button').setAttribute('hidden', '')
+        }
+
         /***********
         Suggestions
          ***********/
@@ -342,7 +352,8 @@
                             </td>
                             <td class="suggested-${part_name}-value align-middle">${current_part_value} -> ${part_suggestion}</td>
                             <td class="suggestion-apply-button align-middle">
-                                <button class="btn btn-success" id="${part_name}-apply" onclick="applySuggestion('${group_name}',  '${part_name}', ${part_suggestion})">
+                                <button class="btn btn-success" id="${part_name}-apply"
+                                            onclick="applySuggestion('${group_name}',  '${part_name}', ${part_suggestion}); showApply()">
                                     Apply
                                 </button>
 
