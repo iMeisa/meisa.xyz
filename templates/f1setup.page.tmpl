@@ -30,11 +30,17 @@
     <div class="container">
 
         <div class="row">
+            <h2 class="mb-3">Adjustments</h2>
+        </div>
+
+        <div class="row">
             <div class="btn-group mb-1" id="condition-1"></div>
         </div>
         <div class="row">
             <div class="btn-group" id="condition-2"></div>
         </div>
+
+        <div class="row mt-4" id="suggestions"></div>
 
     </div>
 {{end}}
@@ -96,6 +102,7 @@
 
         buildButtons()
         buildTables()
+        showTableGroup('aero')
         firstConditionButtons()
 
 
@@ -266,11 +273,16 @@
             button_group.innerHTML = ''
             for (const condition in setup_suggestions[first_condition]) {
                 button_group.innerHTML += `
-                    <button class="btn btn-outline-light" type="button">
+                    <button class="btn btn-outline-light" type="button" onclick="loadSuggestions('${first_condition}', '${condition}')">
                     ${capitalizeAll(condition.replaceAll('_', ' '))}
                     </button>
                 `
             }
+        }
+
+        function loadSuggestions(first_condition, second_condition) {
+            let suggestions = document.getElementById('suggestions')
+            suggestions.innerHTML = JSON.stringify( setup_suggestions[first_condition][second_condition] )
         }
 
         function capitalizeAll(sentence) {
