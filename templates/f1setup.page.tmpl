@@ -281,8 +281,21 @@
         }
 
         function loadSuggestions(first_condition, second_condition) {
-            let suggestions = document.getElementById('suggestions')
-            suggestions.innerHTML = JSON.stringify( setup_suggestions[first_condition][second_condition] )
+            let suggestions_div = document.getElementById('suggestions')
+            suggestions_div.innerHTML = ''
+
+            const selected_suggestions = setup_suggestions[first_condition][second_condition]
+            for (const group_name in selected_suggestions) {
+                suggestions_div.innerHTML += `
+                    <table class="table table-dark table-${group_name} mt-4 mb-4" id="table-${group_name}-suggestion">
+                        <thead>
+                            <tr>
+                                <th scope="col">${part_group_names[group_name]}</th>
+                            </tr>
+                        </thead>
+                    </table>
+                `
+            }
         }
 
         function capitalizeAll(sentence) {
