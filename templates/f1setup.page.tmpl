@@ -55,7 +55,6 @@
         }
         .suggestion-part-name {
             width: 40%;
-            text-align: start;
         }
         .part-buttons {
             width: 10%
@@ -165,15 +164,17 @@
             const setup_value = parseFloat(part_setup.innerHTML)
             const new_setup = calculateAdjustment(part_name, setup_value, step)
 
-            if (part_name === 'brake-bias') {
-                if (new_setup < 71 && new_setup > 49) {
-                    part_setup.innerHTML = `${new_setup}`
-                }
-            }
-            else if (!(part['min-value'] - part['step'] === new_setup) && !(new_setup === part['max-value'] + part['step'])) {
+            if (setupInScope(part_name, new_setup, part)) {
                 part_setup.innerHTML = `${new_setup}`
             }
             updateProgressBars()
+        }
+
+        function setupInScope(part_name, new_setup, part) {
+            if (part_name === 'brake-bias') {
+                return new_setup < 71 && new_setup > 49
+            }
+            return !(part['min-value'] - part['step'] === new_setup) && !(new_setup === part['max-value'] + part['step'])
         }
 
         function showTableGroup(table_name) {
@@ -335,13 +336,21 @@
                 let group_suggestions = document.getElementById(`${group_name}-suggestions`)
                 const suggestion_group = selected_suggestions[group_name]
                 for (const part_name in suggestion_group) {
-                    if (group_name === 'tires') {continue}  // Temporary until solution found
+                    if (group_name === 'tires') {
+                        group_suggestions.innerHTML += `
+                        <tr>
+                            <td>WORK IN PROGRESS</td>
+                        </tr>
+                        `
+                        continue
+                    }  // Temporary until solution found
 
                     const part = parts[group_name][part_name]
                     const current_part_value = Number(document.getElementById(`${part_name}-value`).innerHTML)
                     const part_setup_suggestion = calculateAdjustment(part_name, current_part_value, (suggestion_group[part_name]['change'] * part['step']))
+
                     group_suggestions.innerHTML += `
-                        <tr>
+                        <tr id="${part_name}-suggestion-row">
                             <td class="suggestion-part-name align-middle" id="${part_name}-suggestion">${part['name']}</td>
                             <td class="suggestion-progress-bars align-middle" id="${part_name}-suggestion-bars">
                                 <div class="progress">
@@ -362,6 +371,10 @@
                             </td>
                         </tr>
                     `
+
+                    if (!(setupInScope(part_name, part_setup_suggestion, part))) {
+                        document.getElementById(`${part_name}-apply`).setAttribute('disabled', '')
+                    }
 
                     const has_or = suggestion_group[part_name].hasOwnProperty('or')
                     const has_and = suggestion_group[part_name].hasOwnProperty('and')
@@ -390,21 +403,29 @@
 
                         if (has_or) {
                             document.getElementById(`${part_name}-apply-button`).innerHTML += `
-                            <br>
-                            <button class="btn btn-success mt-2" id="${second_part_name}-apply"
-                                        onclick="applySuggestion('${group_name}',  '${second_part_name}', ${second_part_setup_suggestion}, false); showApply()">
-                                Apply
-                            </button>
-                        `
+                                <br>
+                                <button class="btn btn-success mt-2" id="${second_part_name}-apply"
+                                            onclick="applySuggestion('${group_name}',  '${second_part_name}', ${second_part_setup_suggestion}, false); showApply()">
+                                    Apply
+                                </button>
+                            `
+
+                            if (!(setupInScope(second_part_name, second_part_setup_suggestion, second_part))) {
+                                document.getElementById(`${second_part_name}-apply`).setAttribute('disabled', '')
+                            }
                         } else if (has_and) {
                             document.getElementById(`${part_name}-apply-button`).innerHTML = `
-                            <button class="btn btn-success" id="${part_name}-apply"
-                                        onclick="applySuggestion('${group_name}',  '${part_name}', ${part_setup_suggestion}, false);
-                                        applySuggestion('${group_name}',  '${second_part_name}', ${second_part_setup_suggestion}, true);
-                                        showApply()">
-                                Apply
-                            </button>
-                        `
+                                <button class="btn btn-success" id="${part_name}-apply"
+                                            onclick="applySuggestion('${group_name}',  '${part_name}', ${part_setup_suggestion}, false);
+                                            applySuggestion('${group_name}',  '${second_part_name}', ${second_part_setup_suggestion}, true);
+                                            showApply()">
+                                    Apply
+                                </button>
+                            `
+
+                            if (!(setupInScope(second_part_name, second_part_setup_suggestion, second_part))) {
+                                document.getElementById(`${part_name}-apply`).setAttribute('disabled', '')
+                            }
                         }
 
                         updateProgressBar(group_name, second_part_name, second_part_setup_suggestion, true)
