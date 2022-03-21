@@ -23,6 +23,13 @@
         <div class="row">
             <div id="parts-tables"></div>
         </div>
+
+        <div class="btn-group">
+            <button class="btn btn-outline-light" onclick="downloadSetup()">Export Setup</button>
+            <button class="btn btn-outline-light" onclick="getSetup()">Load Setup</button>
+        </div>
+        <input type="file" id="setup-input" hidden>
+
     </div>
 
     <hr>
@@ -107,6 +114,38 @@
             for (const part_name in parts[group_name]) {
                 setup[part_name] = parts[group_name][part_name]['default']
             }
+        }
+
+        function downloadSetup() {
+            let element = document.createElement('a');
+            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(JSON.stringify(setup)));
+            element.setAttribute('download', 'setup.json');
+
+            element.style.display = 'none';
+            document.body.appendChild(element);
+
+            element.click();
+
+            document.body.removeChild(element);
+        }
+
+        function getSetup() {
+            const setup_input = document.getElementById('setup-input')
+            const reader = new FileReader()
+            setup_input.click()
+
+            setup_input.addEventListener('change', (event) => loadSetup(event))
+        }
+
+        function loadSetup(event) {
+            const selected_file = event.target.files[0];
+
+            var reader = new FileReader();
+            reader.onload = function(event2) {
+                setup = JSON.parse(event2.target.result)
+                revertSetting()
+            };
+            reader.readAsText(selected_file);
         }
 
         buildButtons()
