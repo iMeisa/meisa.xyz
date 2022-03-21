@@ -142,9 +142,9 @@
                             </td>
                             <td class="part-progress-bars align-middle">
                                 <div class="progress">
-                                    <div class="progress-bar" id="${part_name}-bar" style="width: 0"></div>
-                                    <div class="progress-bar increase-setup" id="${part_name}-bar-increase" style="width: 0"></div>
-                                    <div class="progress-bar decrease-setup" id="${part_name}-bar-decrease" style="width: 0"></div>
+                                    <div class="progress-bar" id="${part_name}-bar"></div>
+                                    <div class="progress-bar increase-setup" id="${part_name}-bar-increase"></div>
+                                    <div class="progress-bar decrease-setup" id="${part_name}-bar-decrease"></div>
                                 </div>
                             </td>
                             <td class="part-setup-value align-middle">
@@ -337,30 +337,67 @@
                 for (const part_name in suggestion_group) {
                     if (group_name === 'tires') {continue}  // Temporary until solution found
 
-                    const current_part_value = Number(document.getElementById(`${part_name}-value`).innerHTML)
                     const part = parts[group_name][part_name]
-                    const part_suggestion = calculateAdjustment(part_name, current_part_value, (suggestion_group[part_name]['change'] * part['step']))
+                    const current_part_value = Number(document.getElementById(`${part_name}-value`).innerHTML)
+                    const part_setup_suggestion = calculateAdjustment(part_name, current_part_value, (suggestion_group[part_name]['change'] * part['step']))
                     group_suggestions.innerHTML += `
                         <tr>
-                            <td class="suggestion-part-name align-middle">${part['name']}</td>
-                            <td class="suggestion-progress-bars align-middle">
+                            <td class="suggestion-part-name align-middle" id="${part_name}-suggestion">${part['name']}</td>
+                            <td class="suggestion-progress-bars align-middle" id="${part_name}-suggestion-bars">
                                 <div class="progress">
-                                    <div class="progress-bar" id="${part_name}-suggestion-bar" style="width: 0"></div>
-                                    <div class="progress-bar increase-setup" id="${part_name}-suggestion-bar-increase" style="width: 0"></div>
-                                    <div class="progress-bar decrease-setup" id="${part_name}-suggestion-bar-decrease" style="width: 0"></div>
+                                    <div class="progress-bar" id="${part_name}-suggestion-bar"></div>
+                                    <div class="progress-bar increase-setup" id="${part_name}-suggestion-bar-increase"></div>
+                                    <div class="progress-bar decrease-setup" id="${part_name}-suggestion-bar-decrease"></div>
                                 </div>
                             </td>
-                            <td class="suggested-${part_name}-value align-middle">${current_part_value} -> ${part_suggestion}</td>
-                            <td class="suggestion-apply-button align-middle">
+                            <td class="suggested-${part_name}-value align-middle" id="${part_name}-setup-suggestion">
+                                ${current_part_value} -> ${part_setup_suggestion}
+                            </td>
+                            <td class="suggestion-apply-button align-middle" id="${part_name}-apply-button">
                                 <button class="btn btn-success" id="${part_name}-apply"
-                                            onclick="applySuggestion('${group_name}',  '${part_name}', ${part_suggestion}); showApply()">
+                                            onclick="applySuggestion('${group_name}',  '${part_name}', ${part_setup_suggestion}); showApply()">
                                     Apply
                                 </button>
 
                             </td>
                         </tr>
                     `
-                    updateProgressBar(group_name, part_name, part_suggestion, true)
+
+                    if (suggestion_group[part_name].hasOwnProperty('or')) {
+                        const or_part_name = suggestion_group[part_name]['or']
+
+                        const or_part = parts[group_name][or_part_name]
+                        const current_or_part_value = Number(document.getElementById(`${or_part_name}-value`).innerHTML)
+                        const or_part_setup_suggestion = calculateAdjustment(or_part_name, current_or_part_value, (suggestion_group[part_name]['change2'] * or_part['step']))
+
+                        document.getElementById(`${part_name}-suggestion`).innerHTML += ` <br> OR <br> ${or_part['name']}`
+
+                        document.getElementById(`${part_name}-suggestion-bars`).innerHTML += `
+                            <br>
+                            <div class="progress mt-2">
+                                <div class="progress-bar" id="${or_part_name}-suggestion-bar"></div>
+                                <div class="progress-bar increase-setup" id="${or_part_name}-suggestion-bar-increase"></div>
+                                <div class="progress-bar decrease-setup" id="${or_part_name}-suggestion-bar-decrease"></div>
+                            </div>
+                        `
+
+                        document.getElementById(`${part_name}-setup-suggestion`).innerHTML += `
+                            <br><br>
+                            ${current_or_part_value} -> ${or_part_setup_suggestion}
+                        `
+
+                        document.getElementById(`${part_name}-apply-button`).innerHTML += `
+                            <br>
+                            <button class="btn btn-success mt-2" id="${or_part_name}-apply"
+                                        onclick="applySuggestion('${group_name}',  '${or_part_name}', ${or_part_setup_suggestion}); showApply()">
+                                Apply
+                            </button>
+                        `
+
+                        updateProgressBar(group_name, or_part_name, or_part_setup_suggestion, true)
+                    }
+
+                    updateProgressBar(group_name, part_name, part_setup_suggestion, true)
                 }
             }
         }

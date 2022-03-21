@@ -185,7 +185,7 @@
       },
       "transmission": {
         "on-throttle": {
-          "change": 1
+          "change": 5
         }
       },
       "suspension-geo": {
@@ -230,7 +230,7 @@
       },
       "transmission": {
         "on-throttle": {
-          "change": -1
+          "change": -5
         }
       },
       "suspension-geo": {
@@ -274,7 +274,7 @@
       },
       "transmission": {
         "on-throttle": {
-          "change": -1
+          "change": -5
         }
       },
       "suspension-geo": {
@@ -312,7 +312,7 @@
       },
       "transmission": {
         "on-throttle": {
-          "change": 1
+          "change": 5
         }
       },
       "suspension-geo": {
@@ -374,7 +374,7 @@
       },
       "transmission": {
         "on-throttle": {
-          "change": 1
+          "change": 5
         }
       },
       "suspension-geo": {
@@ -414,7 +414,7 @@
       },
       "transmission": {
         "on-throttle": {
-          "change": -1,
+          "change": -5,
           "and": "off-throttle",
           "change2": -1
         }
@@ -446,7 +446,7 @@
       },
       "transmission": {
         "on-throttle": {
-          "change": 1,
+          "change": 5,
           "and": "off-throttle",
           "change2": 1
         }
