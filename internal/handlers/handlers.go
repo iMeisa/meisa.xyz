@@ -8,6 +8,7 @@ import (
 	"github.com/iMeisa/meisa.xyz/internal/config"
 	"github.com/iMeisa/meisa.xyz/internal/models"
 	"github.com/iMeisa/meisa.xyz/internal/render"
+	"github.com/iMeisa/meisa.xyz/internal/stats"
 	"io/ioutil"
 	"net/http"
 )
@@ -106,7 +107,7 @@ func (m *Repository) Stardew(w http.ResponseWriter, r *http.Request) {
 	render.Template(w, r, "stardew.page.tmpl", &models.TemplateData{})
 }
 
-func (m *Repository) StardewJSON(w http.ResponseWriter, r *http.Request) {
+func (m *Repository) StardewJSON(w http.ResponseWriter, _ *http.Request) {
 	items := stardew.QueryBundles()
 
 	itemsJSON, err := json.MarshalIndent(items, "", "	")
@@ -114,7 +115,16 @@ func (m *Repository) StardewJSON(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("Could not convert to JSON:", err)
 	}
 	w.Header().Set("Content-Type", "application/json")
-	w.Write(itemsJSON)
+	_, _ = w.Write(itemsJSON)
+}
+
+func (m *Repository) Stats(w http.ResponseWriter, r *http.Request) {
+	stringMap := make(map[string]string)
+	stringMap["stats"] = stats.GetAsString()
+
+	render.Template(w, r, "stats.page.tmpl", &models.TemplateData{
+		StringMap: stringMap,
+	})
 }
 
 func (m *Repository) Tradewinds(w http.ResponseWriter, r *http.Request) {

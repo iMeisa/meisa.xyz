@@ -1,0 +1,58 @@
+{{template "base" .}}
+
+{{define "title"}}Page Stats{{end}}
+
+{{define "content"}}
+    <div class="container">
+        <div class="row">
+            <h1>Page Stats</h1>
+        </div>
+
+        <div class="row mt-4">
+            <h4 id="ips"></h4>
+        </div>
+
+        <div class="row mt-3">
+            <table class="table table-dark">
+                <thead>
+                <tr>
+                    <th scope="col">Page</th>
+                    <th scope="col">Hits</th>
+                </tr>
+                </thead>
+                <tbody id="stats-table">
+                </tbody>
+            </table>
+        </div>
+    </div>
+{{end}}
+
+{{define "css"}}
+    <style>
+        .page-name {
+            width: 50%
+        }
+    </style>
+{{end}}
+
+{{define "js"}}
+    <script>
+        const stats = JSON.parse({{index .StringMap "stats"}})
+        console.log(stats)
+
+        const stats_table = document.getElementById('stats-table')
+        // stats_table.innerHTML = `<td>${stats}</td>`
+
+        for (const page in stats['hits']) {
+            console.log(page)
+            stats_table.innerHTML += `
+                <tr>
+                    <td class="page-name">/${page.split('.')[0]}</td>
+                    <td>${stats["hits"][page]}</td>
+                </tr>
+            `
+        }
+
+        document.getElementById('ips').innerHTML += `Unique IPs: ${stats['ips'].length}`
+    </script>
+{{end}}

@@ -12,8 +12,17 @@ import (
 
 const location = "data/stats.json"
 
+func GetAsString() string {
+	file, err := ioutil.ReadFile(location)
+	if err != nil {
+		fmt.Println(err)
+		return ""
+	}
+
+	return string(file)
+}
+
 func Write(pageName, IP string) {
-	fmt.Println(pageName)
 	statsData := read()
 
 	if val, ok := statsData.Hits[pageName]; ok {
@@ -35,9 +44,6 @@ func Write(pageName, IP string) {
 	if err != nil {
 		fmt.Println(err)
 	}
-
-
-	fmt.Println(statsData, IP)
 }
 
 func read() config.StatsConfig {
