@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"github.com/iMeisa/meisa.xyz/internal/config"
 	"github.com/iMeisa/meisa.xyz/internal/models"
+	"github.com/iMeisa/meisa.xyz/internal/network"
+	"github.com/iMeisa/meisa.xyz/internal/stats"
 	"github.com/justinas/nosurf"
 	"html/template"
 	"log"
@@ -51,6 +53,8 @@ func Template(w http.ResponseWriter, r *http.Request, tmpl string, data *models.
 	if err != nil {
 		fmt.Println("Error writing page to browser:", err)
 	}
+
+	stats.Write(tmpl, network.GetRealIP(r))
 }
 
 func CreateTemplateCache() (map[string]*template.Template, error) {

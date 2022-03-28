@@ -14,3 +14,8 @@ type AppConfig struct {
 	Prod          bool
 	Session       *scs.SessionManager
 }
+
+type StatsConfig struct {
+	Hits      map[string]int `json:"hits"`
+	UniqueIPs []string       `json:"ips"`
+}
