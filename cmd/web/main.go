@@ -18,8 +18,10 @@ var session *scs.SessionManager
 
 func main() {
 
+	// If true then site will cache data
 	app.Prod = false
 
+	// Define session params
 	session = scs.New()
 	session.Lifetime = 24 * time.Hour
 	session.Cookie.Persist = true
@@ -36,17 +38,20 @@ func main() {
 	app.TemplateCache = tc
 	app.UseCache = false
 
+	// Create Repository for all page handlers
 	repo := handlers.NewRepo(&app)
 	handlers.NewHandlers(repo)
 	render.NewTemplates(&app)
 
 	fmt.Println(fmt.Sprintf("Starting application on port %s", portNumber))
 
+	// Create server
 	srv := &http.Server{
 		Addr:    portNumber,
 		Handler: routes(&app),
 	}
 
+	// Start server
 	err = srv.ListenAndServe()
 	if err != nil {
 		log.Fatal(err)
