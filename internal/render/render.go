@@ -18,15 +18,18 @@ var functions = template.FuncMap{}
 
 var app *config.AppConfig
 
+// NewTemplates loads app config for render.go
 func NewTemplates(a *config.AppConfig) {
 	app = a
 }
 
+// AddDefaultData adds data to app config by default
 func AddDefaultData(data *models.TemplateData, r *http.Request) *models.TemplateData {
 	data.CSRFToken = nosurf.Token(r)
 	return data
 }
 
+// Template renders selected template
 func Template(w http.ResponseWriter, r *http.Request, tmpl string, data *models.TemplateData) {
 
 	var templateCache map[string]*template.Template
@@ -57,6 +60,7 @@ func Template(w http.ResponseWriter, r *http.Request, tmpl string, data *models.
 	stats.Write(tmpl, network.GetRealIP(r))
 }
 
+// CreateTemplateCache loads all layout templates
 func CreateTemplateCache() (map[string]*template.Template, error) {
 
 	myCache := map[string]*template.Template{}

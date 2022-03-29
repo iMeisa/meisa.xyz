@@ -2,6 +2,7 @@ package network
 
 import "net/http"
 
+// GetRealIP get public ip from visitor
 func GetRealIP(r *http.Request) string {
 	IPAddress := r.Header.Get("X-Real-IP")
 	if IPAddress == "" {
