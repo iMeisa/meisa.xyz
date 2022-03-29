@@ -15,6 +15,7 @@ type AppConfig struct {
 	Session       *scs.SessionManager
 }
 
+// StatsConfig holds the data config for stats.json
 type StatsConfig struct {
 	Hits      map[string]int `json:"hits"`
 	UniqueIPs []string       `json:"ips"`

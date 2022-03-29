@@ -8,6 +8,7 @@ import (
 	"net/http"
 )
 
+// routes directs traffic to selected pages
 func routes(_ *config.AppConfig) http.Handler {
 	mux := chi.NewRouter()
 
