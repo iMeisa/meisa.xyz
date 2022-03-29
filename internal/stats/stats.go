@@ -12,6 +12,7 @@ import (
 
 const location = "data/stats.json"
 
+// GetAsString returns stats.json as string
 func GetAsString() string {
 	file, err := ioutil.ReadFile(location)
 	if err != nil {
@@ -22,6 +23,7 @@ func GetAsString() string {
 	return string(file)
 }
 
+// Write writes new data to stats.json
 func Write(pageName, IP string) {
 	statsData := read()
 
