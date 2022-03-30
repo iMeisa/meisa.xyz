@@ -83,4 +83,18 @@
 
 {{define "js"}}
 
+    <script>
+
+        const request = new XMLHttpRequest()
+        const api_url = 'https://mhw-db.com/'
+
+
+        request.open("GET", api_url + 'armor');
+        request.send();
+
+        request.onload = (e) => {
+            console.log(request.response);
+        }
+    </script>
+
 {{end}}
