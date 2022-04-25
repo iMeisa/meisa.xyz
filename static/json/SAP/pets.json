@@ -1,0 +1,48 @@
+{
+	"1": {
+		"pets":[
+			"ant",
+			"beaver",
+			"cricket",
+			"duck",
+			"fish",
+			"horse",
+			"mosquito",
+			"otter",
+			"pig",
+			"beetle",
+			"bluebird",
+			"ladybug",
+			"cockroach",
+			"babyduck",
+			"frog",
+			"hummingbird",
+			"iguana",
+			"kiwi",
+			"rat",
+			"pillbug",
+			"seahorse",
+			"chinchilla",
+			"frilleddragon",
+			"marmoset",
+			"moth"
+		],
+		"food": [
+			"apple",
+			"honey",
+			"peach",
+			"strawberry",
+			"bacon",
+			"cookie"
+		]
+	},
+
+	"2": {
+		"pets": [
+			"crab"
+		],
+		"food": [
+
+		]
+	}
+}

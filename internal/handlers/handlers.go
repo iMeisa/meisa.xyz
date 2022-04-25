@@ -10,6 +10,7 @@ import (
 	"github.com/iMeisa/meisa.xyz/internal/render"
 	"github.com/iMeisa/meisa.xyz/internal/stats"
 	"io/ioutil"
+	"log"
 	"net/http"
 )
 
@@ -105,6 +106,21 @@ func (m *Repository) MHWSetup(w http.ResponseWriter, r *http.Request) {
 
 func (m *Repository) Morse(w http.ResponseWriter, r *http.Request) {
 	render.Template(w, r, "morse.page.tmpl", &models.TemplateData{})
+}
+
+func (m *Repository) SAP(w http.ResponseWriter, r *http.Request) {
+	stringMap := make(map[string]string)
+
+	petsJSON, err := ioutil.ReadFile("./static/json/SAP/pets.json")
+	if err != nil {
+		log.Println(err)
+	}
+
+	stringMap["sap"] = string(petsJSON)
+
+	render.Template(w, r, "saprandom.page.tmpl", &models.TemplateData{
+		StringMap: stringMap,
+	})
 }
 
 func (m *Repository) Stardew(w http.ResponseWriter, r *http.Request) {

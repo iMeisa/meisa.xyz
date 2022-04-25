@@ -25,6 +25,7 @@ func routes(_ *config.AppConfig) http.Handler {
 	mux.Get("/f1setup", handlers.Repo.F1Setup)
 	mux.Get("/mhwsetup", handlers.Repo.MHWSetup)
 	mux.Get("/morse", handlers.Repo.Morse)
+	mux.Get("/sap", handlers.Repo.SAP)
 	mux.Get("/stardew", handlers.Repo.Stardew)
 	mux.Post("/stardew-json", handlers.Repo.StardewJSON)
 	mux.Get("/stats", handlers.Repo.Stats)
