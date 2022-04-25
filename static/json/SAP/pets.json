@@ -118,5 +118,48 @@
 			"lollipop",
 			"pineapple"
 		]
+	},
+
+	"4": {
+		"pets": [
+			"bison",
+			"deer",
+			"dolphin",
+			"hippo",
+			"parrot",
+			"penguin",
+			"rooster",
+			"skunk",
+			"squirrel",
+			"whale",
+			"worm",
+			"buffalo",
+			"llama",
+			"lobster",
+			"microbe",
+			"anteater",
+			"crow",
+			"donkey",
+			"eel",
+			"hamster",
+			"hawk",
+			"orangutan",
+			"pelican",
+			"platypus",
+			"prayingmantis",
+			"armadillo",
+			"dragonfly",
+			"jerboa",
+			"lynx",
+			"mole",
+			"porcupine"
+		],
+		"food": [
+			"cannedfood",
+			"pear",
+			"cheese",
+			"grapes",
+			"fortunecookie"
+		]
 	}
 }

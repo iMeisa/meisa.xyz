@@ -4,6 +4,7 @@
 
 {{define "content"}}
     <div class="container" id="sap">
+        <button class="btn btn-success" onclick="randomize()">Randomize</button>
     </div>
 {{end}}
 
@@ -40,21 +41,55 @@
         }
 
         function fillItems(tier, random) {
+            const pet_amount = 10
+            const food_amount = tier === "1" ? 2 : 3
+
             const pets_div = document.getElementById(`tier-${tier}-pets`)
             const food_div = document.getElementById(`tier-${tier}-food`)
 
             pets_div.innerHTML = ''
             food_div.innerHTML = ''
 
-            const tier_pets = sap_data[tier]['pets']
-            const tier_food = sap_data[tier]['food']
+            let tier_pets = sap_data[tier]['pets']
+            let tier_food = sap_data[tier]['food']
+
+            if (random) {
+                // Create array of indices
+                let pet_indices = [...Array(tier_pets.length).keys()]
+                let food_indices = [...Array(tier_food.length).keys()]
+
+                // Randomize
+                pet_indices = pet_indices.sort(() => 0.5 - Math.random())
+                food_indices = food_indices.sort(() => 0.5 - Math.random())
+
+                // Slice to amount
+                pet_indices = pet_indices.slice(0, pet_amount)
+                food_indices = food_indices.slice(0, food_amount)
+
+                // Sort ascending
+                pet_indices = pet_indices.sort((a, b) => a - b)
+                food_indices = food_indices.sort((a, b) => a - b)
+
+                console.log(pet_indices.map(x=>tier_pets[x]))
+
+                // Apply to list
+                tier_pets = pet_indices.map(x=>tier_pets[x])
+                tier_food = food_indices.map(x=>tier_food[x])
+            }
+
             for (const i in tier_pets) {
                 const pet_name = tier_pets[i]
-                pets_div.innerHTML += `<img class="item-img" loading="lazy" src="/static/images/SAP/${pet_name}.PNG" alt="${pet_name}">`
+                pets_div.innerHTML += `<img class="item-img" title="${pet_name}" loading="lazy" src="/static/images/SAP/${pet_name}.PNG" alt="${pet_name}">`
             }
             for (const i in tier_food) {
                 const food_name = tier_food[i]
-                food_div.innerHTML += `<img class="item-img" loading="lazy" src="/static/images/SAP/${food_name}.PNG" alt="${food_name}">`
+                food_div.innerHTML += `<img class="item-img" title="${food_name}" loading="lazy" src="/static/images/SAP/${food_name}.PNG" alt="${food_name}">`
+            }
+        }
+
+        function randomize() {
+            for (const tier in sap_data) {
+                fillItems(tier, true)
             }
         }
     </script>
