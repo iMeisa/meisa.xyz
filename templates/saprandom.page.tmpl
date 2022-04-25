@@ -36,10 +36,10 @@
                     <h2>Tier ${tier} Food</h2>
                     <div class="row food" id="tier-${tier}-food"></div>
                 `
-            fillItems(tier)
+            fillItems(tier, false)
         }
 
-        function fillItems(tier) {
+        function fillItems(tier, random) {
             const pets_div = document.getElementById(`tier-${tier}-pets`)
             const food_div = document.getElementById(`tier-${tier}-food`)
 

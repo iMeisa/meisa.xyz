@@ -19,7 +19,7 @@
 			"hummingbird",
 			"iguana",
 			"kiwi",
-			"rat",
+			"mouse",
 			"pillbug",
 			"seahorse",
 			"chinchilla",
@@ -39,10 +39,42 @@
 
 	"2": {
 		"pets": [
-			"crab"
+			"crab",
+			"dodo",
+			"elephant",
+			"flamingo",
+			"hedgehog",
+			"peacock",
+			"rat",
+			"shrimp",
+			"spider",
+			"swan",
+			"bat",
+			"dromedary",
+			"tabbycat",
+			"atlanticpuffin",
+			"dove",
+			"guineapig",
+			"jellyfish",
+			"koala",
+			"panda",
+			"pug",
+			"salamander",
+			"stork",
+			"yak",
+			"frigatebird",
+			"goldfish",
+			"raccoon",
+			"toucan",
+			"wombat"
 		],
 		"food": [
-
+			"cupcake",
+			"meatbone",
+			"pill",
+			"broccoli",
+			"friedshrimp",
+			"croissant"
 		]
 	}
 }
