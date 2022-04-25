@@ -4,17 +4,23 @@
 
 {{define "content"}}
     <div class="container" id="sap">
+        <h1>Pack Randomizer</h1>
+
         <button class="btn btn-success" onclick="randomize()">Randomize</button>
     </div>
 {{end}}
 
 {{define "css"}}
     <style>
+        h1 {
+            margin-bottom: 1em;
+        }
         h2 {
+            font-weight: bold;
             text-align: left;
         }
         .item-img {
-            width: 125px;
+            width: 7.5em;
         }
 
         .food {
