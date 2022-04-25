@@ -161,5 +161,87 @@
 			"grapes",
 			"fortunecookie"
 		]
+	},
+
+	"5": {
+		"pets": [
+			"cow",
+			"crocodile",
+			"monkey",
+			"rhino",
+			"scorpion",
+			"seal",
+			"shark",
+			"turkey",
+			"chicken",
+			"eagle",
+			"goat",
+			"poodle",
+			"fox",
+			"lion",
+			"polarbear",
+			"shoebill",
+			"siberianhusky",
+			"swordfish",
+			"triceratops",
+			"vulture",
+			"zebra",
+			"hyena",
+			"lionfish",
+			"moose"
+		],
+		"food": [
+			"chili",
+			"chocolate",
+			"sushi",
+			"pepper",
+			"stew",
+			"taco",
+			"lemon"
+		]
+	},
+
+	"6": {
+		"pets": [
+			"warthog",
+			"cat",
+			"dragon",
+			"fly",
+			"gorilla",
+			"leopard",
+			"mammoth",
+			"snake",
+			"tiger",
+			"octopus",
+			"sauropod",
+			"tyrannosaurus",
+			"hammerheadshark",
+			"komodo",
+			"orca",
+			"ostrich",
+			"piranha",
+			"reindeer",
+			"sabertoothtiger",
+			"spinosaurus",
+			"stegosaurus",
+			"velociraptor",
+			"alpaca",
+			"lioness",
+			"tapir",
+			"walrus",
+			"whitetiger"
+		],
+		"food": [
+			"melon",
+			"mushroom",
+			"pizza",
+			"steak",
+			"carrot",
+			"hotdog",
+			"orange",
+			"popcorn",
+			"chickenleg",
+			"softice"
+		]
 	}
 }
