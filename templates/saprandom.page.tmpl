@@ -50,11 +50,11 @@
             const tier_food = sap_data[tier]['food']
             for (const i in tier_pets) {
                 const pet_name = tier_pets[i]
-                pets_div.innerHTML += `<img class="item-img" src="/static/images/SAP/${pet_name}.PNG" alt="${pet_name}">`
+                pets_div.innerHTML += `<img class="item-img" loading="lazy" src="/static/images/SAP/${pet_name}.PNG" alt="${pet_name}">`
             }
             for (const i in tier_food) {
                 const food_name = tier_food[i]
-                food_div.innerHTML += `<img class="item-img" src="/static/images/SAP/${food_name}.PNG" alt="${food_name}">`
+                food_div.innerHTML += `<img class="item-img" loading="lazy" src="/static/images/SAP/${food_name}.PNG" alt="${food_name}">`
             }
         }
     </script>

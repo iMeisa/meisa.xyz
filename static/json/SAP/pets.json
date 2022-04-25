@@ -76,5 +76,47 @@
 			"friedshrimp",
 			"croissant"
 		]
+	},
+
+	"3": {
+		"pets": [
+			"badger",
+			"blowfish",
+			"camel",
+			"dog",
+			"giraffe",
+			"kangaroo",
+			"ox",
+			"rabbit",
+			"sheep",
+			"snail",
+			"turtle",
+			"caterpillar",
+			"hatchingchick",
+			"owl",
+			"puppy",
+			"tropicalfish",
+			"blobfish",
+			"capybara",
+			"cassowary",
+			"clownfish",
+			"leech",
+			"okapi",
+			"starfish",
+			"toad",
+			"woodpecker",
+			"aardvark",
+			"bear",
+			"emperortamarin",
+			"seagull",
+			"wasp"
+		],
+		"food": [
+			"garlic",
+			"salad",
+			"cucumber",
+			"lollipop",
+			"pineapple"
+		]
 	}
 }
