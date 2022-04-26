@@ -6,7 +6,11 @@
     <div class="container" id="sap">
         <h1>Pack Randomizer</h1>
 
-        <button class="btn btn-success" onclick="randomize()">Randomize</button>
+        <button class="btn btn-danger mb-4" onclick="randomize(false)">True Random</button>
+        <button class="btn btn-success mb-4" onclick="randomize(true)">Biased Random</button>
+        <br>
+        <label for="bias-slider">Bias Slider</label>
+        <input type="range" class="form-range bg-dark" id="bias-slider" min="10" max="100" step="5">
     </div>
 {{end}}
 
@@ -40,7 +44,14 @@
     <script>
         activateNav('nav-sap')
         const sap_data = JSON.parse({{index .StringMap "sap"}})
-        console.log(sap_data)
+        const prev_selections = {
+            "1": {"pets": [], "food": []},
+            "2": {"pets": [], "food": []},
+            "3": {"pets": [], "food": []},
+            "4": {"pets": [], "food": []},
+            "5": {"pets": [], "food": []},
+            "6": {"pets": [], "food": []},
+        }
 
         const sap_div = document.getElementById('sap')
         for (const tier in sap_data) {
@@ -50,10 +61,10 @@
                     <h2>Tier ${tier} Food</h2>
                     <div class="row food" id="tier-${tier}-food"></div>
                 `
-            fillItems(tier, false)
+            fillItems(tier, false, false)
         }
 
-        function fillItems(tier, random) {
+        function fillItems(tier, random, bias) {
             const pet_amount = 10
             const food_amount = tier === "1" ? 2 : 3
 
@@ -74,9 +85,15 @@
                 pet_indices = [...Array(tier_pets.length).keys()]
                 food_indices = [...Array(tier_food.length).keys()]
 
+                // Apply bias
+                if (bias) {
+                    pet_indices = applyBias(pet_indices, prev_selections[tier]['pets'])
+                    food_indices = applyBias(food_indices, prev_selections[tier]['food'])
+                }
+
                 // Randomize
-                pet_indices = pet_indices.sort(() => 0.5 - Math.random())
-                food_indices = food_indices.sort(() => 0.5 - Math.random())
+                pet_indices = shuffleArray(pet_indices)
+                food_indices = shuffleArray(food_indices)
 
                 // Slice to amount
                 pet_indices = pet_indices.slice(0, pet_amount)
@@ -90,6 +107,10 @@
                 // Apply to list
                 // tier_pets = pet_indices.map(x=>tier_pets[x])
                 // tier_food = food_indices.map(x=>tier_food[x])
+
+                // Save selection
+                prev_selections[tier]["pets"] = pet_indices
+                prev_selections[tier]["food"] = food_indices
             }
 
             for (const i in tier_pets) {
@@ -104,10 +125,26 @@
             }
         }
 
-        function randomize() {
+        function randomize(bias) {
             for (const tier in sap_data) {
-                fillItems(tier, true)
+                fillItems(tier, true, bias)
             }
+        }
+
+        function shuffleArray(raw_array) {
+            return raw_array.sort(() => 0.5 - Math.random())
+        }
+
+        function applyBias(new_range, old_selection) {
+            const bias_percentage = Number(document.getElementById('bias-slider').value)
+            console.log(bias_percentage)
+
+            const bias_count = Math.round(old_selection.length * (bias_percentage / 100))
+            for (const i in old_selection.slice(0, bias_count)) {
+                const index = new_range.indexOf(old_selection[i])
+                new_range.splice(index, 1)
+            }
+            return new_range
         }
     </script>
 {{end}}
