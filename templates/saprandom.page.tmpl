@@ -20,11 +20,18 @@
             text-align: left;
         }
         .item-img {
-            width: 7.5em;
+            width: 7em;
+            margin: 0.25em;
         }
 
         .food {
             margin-bottom: 5em;
+        }
+
+        .selected {
+            outline: 0.6em solid #56bc5a;
+            outline-offset: -0.5em;
+            border-radius: 1.25em;
         }
     </style>
 {{end}}
@@ -59,10 +66,13 @@
             let tier_pets = sap_data[tier]['pets']
             let tier_food = sap_data[tier]['food']
 
+            let pet_indices = []
+            let food_indices = []
+
             if (random) {
                 // Create array of indices
-                let pet_indices = [...Array(tier_pets.length).keys()]
-                let food_indices = [...Array(tier_food.length).keys()]
+                pet_indices = [...Array(tier_pets.length).keys()]
+                food_indices = [...Array(tier_food.length).keys()]
 
                 // Randomize
                 pet_indices = pet_indices.sort(() => 0.5 - Math.random())
@@ -73,23 +83,24 @@
                 food_indices = food_indices.slice(0, food_amount)
 
                 // Sort ascending
-                pet_indices = pet_indices.sort((a, b) => a - b)
-                food_indices = food_indices.sort((a, b) => a - b)
+                // pet_indices = pet_indices.sort((a, b) => a - b)
+                // food_indices = food_indices.sort((a, b) => a - b)
 
-                console.log(pet_indices.map(x=>tier_pets[x]))
 
                 // Apply to list
-                tier_pets = pet_indices.map(x=>tier_pets[x])
-                tier_food = food_indices.map(x=>tier_food[x])
+                // tier_pets = pet_indices.map(x=>tier_pets[x])
+                // tier_food = food_indices.map(x=>tier_food[x])
             }
 
             for (const i in tier_pets) {
                 const pet_name = tier_pets[i]
-                pets_div.innerHTML += `<img class="item-img" title="${pet_name}" loading="lazy" src="/static/images/SAP/${pet_name}.PNG" alt="${pet_name}">`
+                const selected = pet_indices.includes(Number(i)) ? ' selected' : ''
+                pets_div.innerHTML += `<img class="item-img ${selected}" title="${pet_name}" loading="lazy" src="/static/images/SAP/${pet_name}.PNG" alt="${pet_name}">`
             }
             for (const i in tier_food) {
                 const food_name = tier_food[i]
-                food_div.innerHTML += `<img class="item-img" title="${food_name}" loading="lazy" src="/static/images/SAP/${food_name}.PNG" alt="${food_name}">`
+                const selected = food_indices.includes(Number(i)) ? ' selected' : ''
+                food_div.innerHTML += `<img class="item-img ${selected}" title="${food_name}" loading="lazy" src="/static/images/SAP/${food_name}.PNG" alt="${food_name}">`
             }
         }
 
